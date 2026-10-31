@@ -43,6 +43,7 @@ Functional domains:
 
 * **Distribution**:
   - [ ] Publish `src/main/uzz` as the dependency-free `uzzo-workflow-kb` artifact (multi-module build), content under the `uzz/` prefix
+  - [ ] Ship project type profiles (common coding standard and development framework basics) with the content
 ## 🚫 Out-of-Scope / Future Enhancements
 - Implementing the actual features or capabilities described in the generated scope document
 - Providing technical implementation guidance, architectural recommendations, or code generation

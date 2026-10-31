@@ -43,3 +43,4 @@
 | id | title | status |
 |----|-------|--------|
 | [distribution/US-000014](distribution/US-000014/US-000014.md) | Publish the Uzzo Knowledge Base Content as a Lean Artifact | DONE |
+| [distribution/US-000015](distribution/US-000015/US-000015.md) | Ship Project Type Profiles in the Knowledge Base Content | TODO |
