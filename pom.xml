@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.stefanofornari</groupId>
-    <artifactId>uzzo-knowledge-base</artifactId>
+    <artifactId>uzzo-workflow</artifactId>
     <version>0.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <properties>
@@ -11,11 +11,31 @@
         <exec.mainClass>ai.uzzo.kb.UzzoKnowledgeBase</exec.mainClass>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>com.github.stefanofornari</groupId>
+            <artifactId>uzzo-llm</artifactId>
+            <version>0.0.0</version>
+            <type>jar</type>
+        </dependency>
         <!-- LangChain4j -->
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j</artifactId>
             <version>1.21.0</version>
+        </dependency>
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-open-ai</artifactId>
+            <version>1.21.0</version>
+            <type>jar</type>
+        </dependency>
+
+        <!-- Lazy Java -->
+        <dependency>
+            <groupId>com.github.stefanofornari</groupId>
+            <artifactId>lazyjava-core</artifactId>
+            <version>0.0.1</version>
+            <type>jar</type>
         </dependency>
 
         <!-- JUnit 5 -->
@@ -34,9 +54,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>com.github.stefanofornari</groupId>
             <artifactId>xtest</artifactId>
-            <version>3.13.1-SNAPSHOT</version>
+            <version>3.14.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

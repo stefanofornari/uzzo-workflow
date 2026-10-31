@@ -28,7 +28,12 @@ import dev.langchain4j.agent.tool.Tool;
  *
  * Developers provide their own implementations based on deployment context.
  */
-public interface AskTools {
+public interface AskTools extends ste.llm.tools.Tool {
+
+    public final static String ASK_QUESTION = "AskQuestion";
+    public final static String ASK_SINGLE_CHOICE = "AskSingleChoice";
+    public final static String ASK_MULTIPLE_CHOICE = "AskMultipleChoice";
+    public final static String ASK_CONFIRMATION = "AskConfirmation";
 
     /**
      * Ask the user an open-ended question.
@@ -36,7 +41,7 @@ public interface AskTools {
      * @param question the question to ask
      * @return the user's free-text response
      */
-    @Tool(name = "AskQuestion", value = "Ask the user an open-ended question and return their response")
+    @Tool(name = ASK_QUESTION, value = "Ask the user an open-ended question and return their response or '<NO ANSWER PROVIDED>' in case the user does not have an answer")
     String askQuestion(String question);
 
     /**
@@ -46,7 +51,7 @@ public interface AskTools {
      * @param options list of options to choose from (e.g., ["Web", "Mobile", "Desktop"])
      * @return the selected option
      */
-    @Tool(name = "AskSingleChoice", value = "Ask the user to select one option from a list")
+    @Tool(name = ASK_SINGLE_CHOICE, value = "Ask the user to select one option from a list or '<NO ANSWER PROVIDED>' in case the user does not have an answer")
     String askSingleChoice(String question, List<String> options);
 
     /**
@@ -56,7 +61,7 @@ public interface AskTools {
      * @param options list of options to choose from
      * @return list of selected options
      */
-    @Tool(name = "AskMultipleChoice", value = "Ask the user to select multiple options from a list")
+    @Tool(name = ASK_MULTIPLE_CHOICE, value = "Ask the user to select multiple options from a list or '<NO ANSWER PROVIDED>' in case the user does not have an answer")
     List<String> askMultipleChoice(String question, List<String> options);
 
     /**
@@ -65,6 +70,6 @@ public interface AskTools {
      * @param question the confirmation question
      * @return true if user confirms, false otherwise
      */
-    @Tool(name = "AskConfirmation", value = "Ask the user to confirm a decision (yes/no)")
+    @Tool(name = ASK_CONFIRMATION, value = "Ask the user to confirm a decision (yes/no) or '<NO ANSWER PROVIDED>' in case the user does not have an answer")
     boolean askConfirmation(String question);
 }

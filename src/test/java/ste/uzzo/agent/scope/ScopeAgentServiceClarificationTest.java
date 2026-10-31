@@ -23,14 +23,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dev.langchain4j.agent.tool.Tool;
-import dev.langchain4j.memory.chat.MessageWindowChatMemory;
 import dev.langchain4j.service.AiServices;
+import dev.langchain4j.service.TokenStream;
 import ste.llm.tools.AbstractTool;
-import ste.xtest.llm.DummyChatModel;
 import ste.uzzo.agent.tools.AskTools;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ste.xtest.llm.DummyStreamingChatModel;
 
 /**
  * Test suite for ScopeAgentService prompt analysis with clarification tools.
@@ -42,16 +42,19 @@ import org.junit.jupiter.api.Test;
  */
 public class ScopeAgentServiceClarificationTest {
 
-    private DummyChatModel model;
-    private ScopeAgentService agent;
+    private DummyStreamingChatModel model;
+    private UzzoScopeAgent agent;
     private MockAskTools mockTools;
 
     @BeforeEach
     void setUp() throws IOException {
-        model = new DummyChatModel();
+        model = new DummyStreamingChatModel();
         mockTools = new MockAskTools();
 
-        agent = new ScopeAgentService(model, mockTools);
+        agent = this.agent = AiServices.builder(UzzoScopeAgent.class)
+            .streamingChatModel(model)
+            .tools(mockTools)
+            .build();
 
         MockAskTools.reset();
     }
@@ -62,9 +65,9 @@ public class ScopeAgentServiceClarificationTest {
             + "on AWS cloud platform with JWT authentication and Stripe payments. "
             + "Architecture: microservices with REST API. use mock 'ready.txt'";
 
-        String response = agent.scope(completePrompt);
+        TokenStream response = agent.scope(completePrompt);
 
-        then(response).isNotEmpty();
+        then(response).isNotNull();
         then(MockAskTools.calls()).isEmpty();
     }
 
@@ -73,9 +76,13 @@ public class ScopeAgentServiceClarificationTest {
         String ambiguousPrompt = "Build a scalable application with authentication and payments. "
             + "execute tool AskSingleChoice";
 
-        String response = agent.scope(ambiguousPrompt);
+        TokenStream response = agent.scope(ambiguousPrompt)
+            .onPartialResponse(s -> {})
+            .onCompleteResponse(r -> {})
+            .ignoreErrors();
+        response.start();
 
-        then(response).isNotEmpty();
+        then(response).isNotNull();
         then(MockAskTools.calls()).contains("AskSingleChoice");
     }
 
@@ -84,9 +91,13 @@ public class ScopeAgentServiceClarificationTest {
         String architectureGapPrompt = "Create a user management system with login and profile updates. "
             + "execute tool AskQuestion";
 
-        String response = agent.scope(architectureGapPrompt);
+        TokenStream response = agent.scope(architectureGapPrompt)
+            .onPartialResponse(s -> {})
+            .onCompleteResponse(r -> {})
+            .ignoreErrors();
+        response.start();
 
-        then(response).isNotEmpty();
+        then(response).isNotNull();
         then(MockAskTools.calls()).contains("AskQuestion");
     }
 
@@ -95,9 +106,13 @@ public class ScopeAgentServiceClarificationTest {
         String incompletePrompt = "Build an app with user authentication. "
             + "execute tool AskSingleChoice";
 
-        String response = agent.scope(incompletePrompt);
+        TokenStream response = agent.scope(incompletePrompt)
+            .onPartialResponse(s -> {})
+            .onCompleteResponse(r -> {})
+            .ignoreErrors();
+        response.start();
 
-        then(response).isNotEmpty();
+        then(response).isNotNull();
         then(MockAskTools.calls().size()).isGreaterThan(0);
     }
 

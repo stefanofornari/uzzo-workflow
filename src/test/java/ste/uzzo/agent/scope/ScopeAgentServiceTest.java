@@ -24,10 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dev.langchain4j.agent.tool.Tool;
-import dev.langchain4j.memory.chat.MessageWindowChatMemory;
 import dev.langchain4j.service.AiServices;
+import dev.langchain4j.service.TokenStream;
 import ste.llm.tools.AbstractTool;
-import ste.xtest.llm.DummyChatModel;
+import ste.xtest.llm.DummyStreamingChatModel;
 import ste.uzzo.agent.tools.AskTools;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -42,15 +42,18 @@ import org.junit.jupiter.api.Test;
  */
 public class ScopeAgentServiceTest {
 
-    private DummyChatModel model;
-    private ScopeAgentService agent;
+    private DummyStreamingChatModel model;
+    private UzzoScopeAgent agent;
 
     @BeforeEach
     void setUp() throws IOException {
-        model = new DummyChatModel();
+        model = new DummyStreamingChatModel();
         MockAskTools tools = new MockAskTools();
 
-        agent = new ScopeAgentService(model, tools);
+        agent = agent = this.agent = AiServices.builder(UzzoScopeAgent.class)
+            .streamingChatModel(model)
+            .tools(tools)
+            .build();
 
         tools.reset();
     }
@@ -60,33 +63,30 @@ public class ScopeAgentServiceTest {
         String prompt = "Create a REST API for managing user profiles with JWT authentication. "
             + "use mock 'ready.txt'";
 
-        String response = agent.scope(prompt);
+        TokenStream response = agent.scope(prompt);
 
-        then(response).isNotEmpty();
+        then(response).isNotNull();
     }
 
     @Test
     void agent_rejects_empty_prompt() {
         thenThrownBy(() -> agent.scope(""))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining("prompt")
-            .hasMessageContaining("empty");
+            .hasMessageContaining("non blank");
     }
 
     @Test
     void agent_rejects_whitespace_only_prompt() {
         thenThrownBy(() -> agent.scope("   \t\n   "))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining("prompt")
-            .hasMessageContaining("empty");
+            .hasMessageContaining("non blank");
     }
 
     @Test
     void agent_rejects_null_prompt() {
         thenThrownBy(() -> agent.scope(null))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessageContaining("prompt")
-            .hasMessageContaining("empty");
+            .hasMessageContaining("non blank");
     }
 
     @Test

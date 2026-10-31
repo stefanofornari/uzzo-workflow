@@ -17,11 +17,10 @@
 package ste.uzzo.agent.scope;
 
 import dev.langchain4j.service.SystemMessage;
+import dev.langchain4j.service.TokenStream;
 import dev.langchain4j.service.UserMessage;
+import ste.lazyjava.safe.Safe;
 
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.nio.charset.StandardCharsets;
 
 /**
  * LangChain4j AI Service for the Scope Agent's gap analysis capabilities.
@@ -30,7 +29,9 @@ import java.nio.charset.StandardCharsets;
  * requirements before scoping begins. The system prompt is loaded from a
  * resource file rather than defined inline.
  */
-public interface UzzoScopeAgent {
+//@SystemMessage(fromResource = "uzzo-scope-agent-system-prompt.txt")
+@SystemMessage(fromResource = "uzzo-scope-agent-system-prompt.txt")
+public interface UzzoScopeAgent extends Safe {
 
     /**
      * Processes a user message in the gap analysis dialogue with input validation.
@@ -43,32 +44,9 @@ public interface UzzoScopeAgent {
      * @return the agent's response
      * @throws IllegalArgumentException if userMessage is null, empty, or whitespace-only
      */
-    default String scope(final String userMessage) {
-        if (userMessage == null || userMessage.isBlank()) {
-            throw new IllegalArgumentException("prompt cannot be null or empty");
-        }
+    default TokenStream scope(final String userMessage) {
+        requireNonBlank(userMessage, "userMessage");
         return _scope_(userMessage);
-    }
-
-    /**
-     * Loads the system prompt from the resource file.
-     *
-     * <p>The prompt guides the agent's gap analysis behavior, including when
-     * to use clarifying tools and how to partition requirements.
-     *
-     * @return the system prompt text
-     * @throws IllegalStateException if the resource file is not found
-     */
-    @SystemMessage
-    default String systemMessage() {
-        try (var is = getClass().getResourceAsStream("uzzo-scope-agent-system-prompt.txt")) {
-            if (is == null) {
-                throw new IllegalStateException("Resource not found: uzzo-scope-agent-system-prompt.txt");
-            }
-            return new String(is.readAllBytes(), StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
     }
 
     /**
@@ -78,7 +56,7 @@ public interface UzzoScopeAgent {
      * by {@link dev.langchain4j.service.AiServices}.
      *
      * @param userMessage the validated user message
-     * @return the agent's response
+     * @return the agent's response token stream
      */
-    String _scope_(@UserMessage String userMessage);
+    TokenStream _scope_(@UserMessage String userMessage);
 }
