@@ -37,3 +37,9 @@
 |----|-------|--------|
 | [persist/US-000012](persist/US-000012/US-000012.md) | Write the Scope Document to a Target Markdown File | TODO |
 | [persist/US-000013](persist/US-000013/US-000013.md) | Update an Existing Scope File In Place | TODO |
+
+## distribution
+
+| id | title | status |
+|----|-------|--------|
+| [distribution/US-000014](distribution/US-000014/US-000014.md) | Publish the Uzzo Knowledge Base Content as a Lean Artifact | DONE |

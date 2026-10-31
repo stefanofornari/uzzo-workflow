@@ -10,7 +10,7 @@ Functional domains:
 - **Boundary Definition & Extraction**: Partition all discussed items into mutually exclusive In-Scope and Out-of-Scope groups
 - **Scope Compilation**: Generate a structured scope document using the exact template defined in the skill
 - **Persistence**: Save or update the compiled scope document to a target file
-
+- **Distribution**: Publish the canonical knowledge base content (skills, standards, seed articles) as a lean, dependency-free artifact for other tools
 ## 🎯 In-Scope Capabilities
 * **Prompt Analysis & Gap Detection**:
   - [ ] Accept a user prompt describing a project, feature, or user story
@@ -41,6 +41,8 @@ Functional domains:
   - [ ] Update existing scope files in place
   - [ ] Create new scope files when target does not exist
 
+* **Distribution**:
+  - [ ] Publish `src/main/uzz` as the dependency-free `uzzo-workflow-kb` artifact (multi-module build), content under the `uzz/` prefix
 ## 🚫 Out-of-Scope / Future Enhancements
 - Implementing the actual features or capabilities described in the generated scope document
 - Providing technical implementation guidance, architectural recommendations, or code generation
