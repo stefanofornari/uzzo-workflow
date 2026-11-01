@@ -4,9 +4,11 @@
     <parent>
         <groupId>com.github.stefanofornari</groupId>
         <artifactId>uzzo-workflow-parent</artifactId>
-        <version>0.0.0-SNAPSHOT</version>
+        <version>0.0.0</version>
     </parent>
+    <groupId>com.github.stefanofornari</groupId>
     <artifactId>uzzo-workflow-kb</artifactId>
+    <version>0.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Uzzo Workflow Knowledge Base Content</name>
     <description>Canonical Uzzo knowledge base content (skills, standards, seed articles) under the uzz/ classpath prefix. No dependencies.</description>
@@ -15,13 +17,11 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.10.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.25.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -37,5 +37,34 @@
                 </excludes>
             </resource>
         </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
+
+    <scm>
+        <connection>scm:git:https://github.com/stefanofornari/uzzo-workflow.git</connection>
+        <developerConnection>scm:git:git@github.com:stefanofornari/uzzo-workflow.git</developerConnection>
+        <url>https://github.com/stefanofornari/uzzo-workflow</url>
+        <tag>uzzo-workflow-kb-0.0.0</tag>
+    </scm>
 </project>

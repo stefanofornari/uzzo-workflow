@@ -26,3 +26,4 @@ target/surefire-reports/
 
 # Generated files
 *.class
+.flattened-pom.xml
