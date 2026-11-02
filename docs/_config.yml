@@ -1,0 +1,27 @@
+title: Uzzo Workflow
+description: AI-based software development for Product Owners and Product Engineers
+url: https://stefanofornari.github.io
+baseurl: /uzzo-workflow
+
+# GitHub Pages builds this natively; the theme is fetched at build time.
+remote_theme: just-the-docs/just-the-docs
+plugins:
+  - jekyll-remote-theme
+
+color_scheme: light
+search_enabled: true
+heading_anchors: true
+
+aux_links:
+  GitHub:
+    - https://github.com/stefanofornari/uzzo-workflow
+aux_links_new_tab: true
+
+gh_edit_link: true
+gh_edit_link_text: Edit this page on GitHub
+gh_edit_repository: https://github.com/stefanofornari/uzzo-workflow
+gh_edit_branch: main
+gh_edit_source: docs
+gh_edit_view_mode: edit
+
+footer_content: Copyright &copy; 2026 the Uzzo Workflow authors. Distributed under the <a href="https://github.com/stefanofornari/uzzo-workflow/blob/main/LICENSE">Apache License 2.0</a>.
