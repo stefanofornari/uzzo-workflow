@@ -12,6 +12,8 @@ scoping, story writing, and coding stay consistent.
 
 ## Structure
 
+To create one in a project, follow the [step-by-step instructions](instructions).
+
 The KB has four top-level directories:
 
 | Directory | Purpose |

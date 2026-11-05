@@ -1,10 +1,13 @@
 ---
 title: Getting Started
 layout: default
-nav_order: 4
+nav_order: 5
 ---
 
 # Getting started
+
+This page is for developers using the Java API. To try Uzzo from the NetBeans
+IDE, follow the [step-by-step instructions](instructions).
 
 ## Requirements
 
