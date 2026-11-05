@@ -10,7 +10,7 @@ nav_order: 1
 From Code to Intent: A User Story-Driven Workflow for AI Software Development
 {: .fs-6 .fw-300 }
 
-[Try it in NetBeans](instructions){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[Try it in NetBeans](https://stefanofornari.github.io/nb-uzzo-workflow/){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [Get started](getting-started){: .btn .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [View on GitHub](https://github.com/stefanofornari/uzzo-workflow){: .btn .fs-5 .mb-4 .mb-md-0 }
 

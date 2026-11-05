@@ -12,15 +12,9 @@ color_scheme: light
 search_enabled: true
 heading_anchors: true
 
-callouts:
-  screenshot:
-    title: Screenshot
-    color: blue
-  todo:
-    title: To be confirmed
-    color: yellow
-
 aux_links:
+  NetBeans plugin:
+    - https://stefanofornari.github.io/nb-uzzo-workflow/
   GitHub:
     - https://github.com/stefanofornari/uzzo-workflow
 aux_links_new_tab: true
