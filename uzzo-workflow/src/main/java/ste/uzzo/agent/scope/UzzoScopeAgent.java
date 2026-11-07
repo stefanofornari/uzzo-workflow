@@ -16,7 +16,6 @@
  */
 package ste.uzzo.agent.scope;
 
-import dev.langchain4j.service.SystemMessage;
 import dev.langchain4j.service.TokenStream;
 import dev.langchain4j.service.UserMessage;
 import ste.lazyjava.safe.Safe;
@@ -26,11 +25,9 @@ import ste.lazyjava.safe.Safe;
  * LangChain4j AI Service for the Scope Agent's gap analysis capabilities.
  *
  * <p>The agent analyzes developer prompts to identify missing or ambiguous
- * requirements before scoping begins. The system prompt is loaded from a
- * resource file rather than defined inline.
+ * requirements before scoping begins. The system prompt is loaded from the
+ * shared scope skill resource.
  */
-//@SystemMessage(fromResource = "uzzo-scope-agent-system-prompt.txt")
-@SystemMessage(fromResource = "uzzo-scope-agent-system-prompt.txt")
 public interface UzzoScopeAgent extends Safe {
 
     /**

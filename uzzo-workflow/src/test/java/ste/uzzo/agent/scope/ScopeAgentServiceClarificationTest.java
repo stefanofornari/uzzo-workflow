@@ -25,6 +25,7 @@ import java.util.List;
 import dev.langchain4j.agent.tool.Tool;
 import dev.langchain4j.service.AiServices;
 import dev.langchain4j.service.TokenStream;
+import ste.uzzo.agent.AgentSystemMessage;
 import ste.llm.tools.AbstractTool;
 import ste.uzzo.agent.tools.AskTools;
 
@@ -53,6 +54,7 @@ public class ScopeAgentServiceClarificationTest {
 
         agent = this.agent = AiServices.builder(UzzoScopeAgent.class)
             .streamingChatModel(model)
+            .systemMessageProvider(chatMemoryId -> AgentSystemMessage.loadSkill("uzz/skills/scope/SKILL.md"))
             .tools(mockTools)
             .build();
 
