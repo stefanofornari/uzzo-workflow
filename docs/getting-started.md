@@ -6,6 +6,9 @@ nav_order: 4
 
 # Getting started
 
+This page is for developers using the Java API. To try Uzzo from the NetBeans
+IDE, see the [NetBeans plugin](https://stefanofornari.github.io/nb-uzzo-workflow/).
+
 ## Requirements
 
 - Java 21+

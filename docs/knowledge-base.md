@@ -12,6 +12,9 @@ scoping, story writing, and coding stay consistent.
 
 ## Structure
 
+To create one in a project, use the
+[NetBeans plugin](https://stefanofornari.github.io/nb-uzzo-workflow/instructions).
+
 The KB has four top-level directories:
 
 | Directory | Purpose |
