@@ -20,6 +20,7 @@ import static org.assertj.core.api.BDDAssertions.then;
 import static org.assertj.core.api.BDDAssertions.thenThrownBy;
 
 import java.io.IOException;
+import ste.uzzo.agent.AgentSystemMessage;
 import dev.langchain4j.data.message.ChatMessage;
 import dev.langchain4j.data.message.ChatMessageType;
 import dev.langchain4j.data.message.SystemMessage;
@@ -46,6 +47,7 @@ public class UzzoScopeAgentTest {
 
         agent = AiServices.builder(UzzoScopeAgent.class)
             .streamingChatModel(model)
+            .systemMessageProvider(chatMemoryId -> AgentSystemMessage.loadSkill("uzz/skills/scope/SKILL.md"))
             .build();
     }
 
@@ -65,7 +67,9 @@ public class UzzoScopeAgentTest {
 
         then(response).isNotNull();
         then(msg.type()).isEqualTo(ChatMessageType.SYSTEM);
-        then(((SystemMessage)msg).text()).startsWith("You are the Software and Business analyst.");
+        then(((SystemMessage)msg).text()).startsWith("# Skill: Scope Definition Reviewer");
+        then(((SystemMessage)msg).text()).contains("## Goal");
+        then(((SystemMessage)msg).text()).doesNotContain("name: scope-definition-reviewer");
     }
 
     @Test
