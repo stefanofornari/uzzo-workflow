@@ -8,7 +8,7 @@
     </parent>
     <groupId>com.github.stefanofornari</groupId>
     <artifactId>uzzo-workflow</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Uzzo Workflow</name>
     <properties>
@@ -18,7 +18,7 @@
         <dependency>
             <groupId>com.github.stefanofornari</groupId>
             <artifactId>uzzo-workflow-kb</artifactId>
-            <version>0.0.0</version>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.github.stefanofornari</groupId>
@@ -96,6 +96,6 @@
         <connection>scm:git:https://github.com/stefanofornari/uzzo-workflow.git</connection>
         <developerConnection>scm:git:git@github.com:stefanofornari/uzzo-workflow.git</developerConnection>
         <url>https://github.com/stefanofornari/uzzo-workflow</url>
-        <tag>uzzo-workflow-0.0.1</tag>
+        <tag>uzzo-workflow-0.0.0</tag>
     </scm>
 </project>
