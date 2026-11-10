@@ -1,14 +1,14 @@
 ---
-title: Scoping
+title: Scope
 layout: default
 parent: The Workflow
 nav_order: 1
 ---
 
-# Scoping phase
+# Scope action
 
-The current release provides the scoping phase via `UzzoScopeAgent` and
-`ScopeAgentService`. The agent:
+The **scope** action performs interactive gap analysis and boundary definition
+via `UzzoScopeAgent` (and `ScopeAgentService`). The agent:
 
 - accepts free-text prompts: rough user stories, or a rough description of a
   feature or goal

@@ -34,7 +34,7 @@ That is why AI-assisted development needs more than prompts and generated code. 
 
 Uzzo Workflow is an AI-based software development workflow for product owners and product engineers. It brings together three integrated pillars:
 
-1. **AI-Based Workflow**: An agentic framework for structured scope definition, gap analysis, user story writing, and coding.
+1. **AI-based workflow**: Agentic actions for **scope** (gap analysis and boundary definition), **story** (INVEST user-story generation), and **code** (story implementation).
 2. **The Uzzo Knowledge Base**: A structured Markdown repository that holds the project's scope, domains, library references, metadata, skills, and stories. It provides a shared source of truth across the workflow.
 3. **Skills and Agents**: Reusable workflow skills and [LangChain4j](https://docs.langchain4j.dev/) agents that operate on the knowledge base to support scoping, story writing, code generation, and knowledge-base management.
 
@@ -44,7 +44,7 @@ Together, these pillars replace disconnected documents and hand-offs with a cont
 
 Most projects scatter their context across tickets, documents, chat messages, and individual memories. Decisions become difficult to trace, and the code often becomes the only artifact that reliably survives. Uzzo takes a different approach: the knowledge base is a durable representation of the product's intent, and code is one of the things that can be produced from it.
 
-The knowledge base is the shared context that connects the workflow's phases. Scope records the capabilities and boundaries of the system. User stories express the value to be delivered in manageable increments. Supporting library references, metadata, and reusable skills provide further context to both people and agents. As the understanding of a project changes, the knowledge base can evolve with it.
+The knowledge base is the shared context that connects the workflow's actions. Scope records the capabilities and boundaries of the system. User stories express the value to be delivered in manageable increments. Supporting library references, metadata, and reusable skills provide further context to both people and agents. As the understanding of a project changes, the knowledge base can evolve with it.
 
 The KB is organized into four top-level directories (`library/`, `project/`, `skills/`, and `stories/`) with conventions designed to keep it navigable and consistent: no root files, nested categorization, full relative paths, and a `### Keywords` section on every article. User stories follow a consistent template and are tracked in an `index.md`, while each domain carries a narrative `scope.md`. See [Knowledge Base](knowledge-base) for the details.
 
@@ -56,7 +56,7 @@ That content is also shipped as a lean artifact, `uzzo-workflow-kb`, with no com
 
 The real risk of AI-assisted development is speed in the wrong direction: a model can produce something plausible without understanding the needs, constraints, or trade-offs behind a request.
 
-Uzzo Workflow addresses this through its [Scoping phase](workflow/scoping), which is the first implemented phase today. Rather than jumping directly from a prompt to code, `UzzoScopeAgent` and `ScopeAgentService` take a free-text project description and help perform the work a good product and engineering team does at the start of a project:
+Uzzo Workflow addresses this through its actions, starting with **scope**. Rather than jumping directly from a prompt to code, `UzzoScopeAgent` takes a free-text project description and helps perform the work a good product and engineering team does at the start of a project:
 
 - Identify missing requirements, platform assumptions, and architectural gaps.
 - Ask targeted clarifying questions through a pluggable `AskTools` interface.
@@ -67,19 +67,19 @@ The conversation is the control mechanism. Each answer narrows the space of poss
 
 The result is a durable, versionable document that humans and agents can both read and build on as the work progresses.
 
+From that scope, the **story** action (`UzzoStoryAgent`) derives INVEST-compliant user stories, and the **code** action (`UzzoCodeAgent`) implements them from specification to tested code, all against the shared knowledge base.
+
 ## Extensible by Design
 
 Uzzo Workflow does not assume a single user interface. The `AskTools` interface (`askQuestion`, `askSingleChoice`, `askMultipleChoice`, and `askConfirmation`) lets the same agent run in a CLI, a web app, a GUI, or a test harness. Platform-specific interaction is injected rather than hard-coded, so the workflow logic remains portable. A `Safe` utility handles input validation, and the scope document output is standardized Markdown.
 
 No single tool or interface will own software development, so product owners and product engineers should be able to work where they already work, while different tools read from and write to the same knowledge base.
 
-## The Phases Ahead
+## Agile Iteration, Not a Fixed Sequence
 
-Scoping is the first implemented phase. [User story writing](workflow/user-stories) and coding are planned next, with all phases sharing the same context and working within the same Agile iteration cycle.
+Uzzo Workflow provides three core actions - **scope**, **story**, and **code** - that teams move between fluidly rather than as a waterfall. A gap discovered during implementation should send the team back to scoping; a story refined during development should update the shared understanding. Scope, stories, and code are connected parts of an iterative process, not isolated hand-offs between stages.
 
-The phases are deliberately not a waterfall. A gap discovered during implementation should send the team back to scoping; a story refined during development should update the shared understanding. Scope, stories, and code are connected parts of an iterative process, not isolated hand-offs between stages.
-
-The longer-term goal is a workflow in which product intent can be progressively clarified, expressed as user stories, and translated into implementation while remaining traceable throughout the process. See [The Workflow](workflow) for the full picture.
+The actions share the same knowledge base and work within the same Agile iteration cycle, so product intent can be progressively clarified, expressed as user stories, and translated into implementation while remaining traceable throughout the process. See [The Workflow](workflow) for the full picture.
 
 ## Uzzo Workflow in Practice
 

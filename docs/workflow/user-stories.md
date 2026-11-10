@@ -1,11 +1,15 @@
 ---
-title: User Stories
+title: Story
 layout: default
 parent: The Workflow
 nav_order: 2
 ---
 
-# User stories
+# Story action
+
+The **story** action generates and refines user stories from a scope via
+`UzzoStoryAgent` (see `UzzoAgentBuilder.StoryAgentBuilder()`), using the shared
+`uzz/skills/story/SKILL.md` skill.
 
 A user story is a short description of a feature told from the perspective of
 the person who wants it. The standard format, popularized by Mike Cohn:
@@ -25,9 +29,10 @@ the person who wants it. The standard format, popularized by Mike Cohn:
 
 ## In Uzzo Workflow
 
-User stories are the primary input of the coding phase. Each story lives in its
-own file in the [knowledge base](../knowledge-base), and the story-writing agent
-is planned for a future release.
+Stories are produced to be INVEST-compliant with clear acceptance criteria and
+are the primary input of the **code** action. Each story lives in its own file
+in the [knowledge base](../knowledge-base), following the
+[story template](https://github.com/stefanofornari/uzzo-workflow/blob/main/src/main/uzz/skills/kb/references/user_story.md).
 
 ## References
 

@@ -28,7 +28,7 @@ Together, these pillars replace disconnected documents and hand-offs with a cont
 
 Most projects scatter their context across tickets, documents, chat messages, and individual memories. Decisions become difficult to trace, and the code often becomes the only artifact that reliably survives. Uzzo takes a different approach: the knowledge base is a durable representation of the product's intent, and code is one of the things that can be produced from it.
 
-The knowledge base is the shared context that connects the workflow’s phases. It is the shared context that connects the workflow's phases. Scope records the capabilities and boundaries of the system. User stories express the value to be delivered in manageable increments. Supporting library references, metadata, and reusable skills provide further context to both people and agents. As the understanding of a project changes, the knowledge base can evolve with it.
+The knowledge base is the shared context that connects the workflow's actions. Scope records the capabilities and boundaries of the system. User stories express the value to be delivered in manageable increments. Supporting library references, metadata, and reusable skills provide further context to both people and agents. As the understanding of a project changes, the knowledge base can evolve with it.
 
 The KB is organized into four top-level directories—`library/`, `project/`, `skills/`, and `stories/`—with conventions designed to keep it navigable and consistent: no root files, nested categorization, full relative paths, and a `### Keywords` section on every article. User stories follow a consistent template and are tracked in an `index.md`, while each domain carries a narrative `scope.md`.
 
@@ -40,16 +40,16 @@ That content is also shipped as a lean artifact, `uzzo-workflow-kb`, with no com
 
 The real risk of AI-assisted development is speed in the wrong direction: a model can produce something plausible without understanding the needs, constraints, or trade-offs behind a request.
 
-Uzzo Workflow addresses this through its Scoping phase, which is the first implemented phase today. Rather than jumping directly from a prompt to code, `UzzoScopeAgent` and `ScopeAgentService` take a free-text project description and help perform the work a good product and engineering team does at the start of a project:
+Uzzo Workflow addresses this through its **scope** action. Rather than jumping directly from a prompt to code, `UzzoScopeAgent` takes a free-text project description and helps perform the work a good product and engineering team does at the start of a project:
 
 - Identify missing requirements, platform assumptions, and architectural gaps.
 - Ask targeted clarifying questions through a pluggable `AskTools` interface.
 - Partition capabilities into **In-Scope** and **Out-of-Scope** boundaries.
 - Produce a structured `scope.md` document that is updated iteratively as clarification progresses.
 
-The conversation is the control mechanism. Each answer narrows the space of possible interpretations; each boundary is recorded. When the analysis identifies multiple architectural domains—such as backend, frontend, storage, analysis, or infrastructure—each can be scoped separately, with its own domain-specific `scope.md`. This allows teams to work in parallel without losing the shared picture.
+The conversation is the control mechanism. Each answer narrows the space of possible interpretations; each boundary is recorded. When the analysis identifies multiple architectural domains, such as backend, frontend, storage, analysis, or infrastructure, each can be scoped separately, with its own domain-specific `scope.md`. This allows teams to work in parallel without losing the shared picture.
 
-The result is a durable, versionable document that humans and agents can both read and build on as the work progresses.
+The result is a durable, versionable document that humans and agents can both read and build on as the work progresses. From there, the **story** action derives INVEST-compliant user stories and the **code** action implements them, all against the shared knowledge base.
 
 ## Extensible by Design
 
@@ -57,13 +57,11 @@ Uzzo Workflow does not assume a single user interface. The `AskTools` interface�
 
 No single tool or interface will own software development, so product owners and product engineers should be able to work where they already work, while different tools read from and write to the same knowledge base.
 
-## The Phases Ahead
+## Actions, not a fixed sequence
 
-Scoping is the first implemented phase. User story writing and coding are planned next, with all phases sharing the same context and working within the same Agile iteration cycle.
+Uzzo Workflow provides three core actions - **scope**, **story**, and **code** - that teams move between fluidly rather than as a waterfall. A gap discovered during implementation should send the team back to scoping; a story refined during development should update the shared understanding. Scope, stories, and code are connected parts of an iterative process—not isolated hand-offs between stages.
 
-The phases are deliberately not a waterfall. A gap discovered during implementation should send the team back to scoping; a story refined during development should update the shared understanding. Scope, stories, and code are connected parts of an iterative process—not isolated hand-offs between stages.
-
-The longer-term goal is a workflow in which product intent can be progressively clarified, expressed as user stories, and translated into implementation while remaining traceable throughout the process. Today’s implementation covers scoping; the remaining phases are still ahead.
+The actions share the same knowledge base and work within the same Agile iteration cycle, so product intent can be progressively clarified, expressed as user stories, and translated into implementation while remaining traceable throughout the process. See [The Workflow](../workflow) for the full picture.
 
 ## Uzzo Workflow in Practice
 
