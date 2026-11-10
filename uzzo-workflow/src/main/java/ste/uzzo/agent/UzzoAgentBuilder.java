@@ -20,6 +20,7 @@ package ste.uzzo.agent;
 import dev.langchain4j.service.AiServices;
 import ste.uzzo.agent.scope.UzzoScopeAgent;
 import ste.uzzo.agent.story.UzzoStoryAgent;
+import ste.uzzo.agent.code.UzzoCodeAgent;
 
 /**
  *
@@ -37,6 +38,13 @@ public class UzzoAgentBuilder {
         return AiServices.builder(UzzoStoryAgent.class)
             .systemMessageProvider(
                 chatMemoryId -> AgentSystemMessage.loadSkill("uzz/skills/story/SKILL.md")
+            );
+    }
+
+    public static AiServices<UzzoCodeAgent> CodeAgentBuilder() {
+        return AiServices.builder(UzzoCodeAgent.class)
+            .systemMessageProvider(
+                chatMemoryId -> AgentSystemMessage.loadSkill("uzz/skills/code/SKILL.md")
             );
     }
 }
