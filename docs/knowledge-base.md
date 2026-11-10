@@ -14,6 +14,8 @@ scoping, story writing, and coding stay consistent.
 
 To create one in a project, use the
 [NetBeans plugin](https://stefanofornari.github.io/nb-uzzo-workflow/instructions).
+To install the bundled Uzzo workflow skills in AI coding tools, see
+[Installing skills](installing-skills).
 
 The KB has four top-level directories:
 

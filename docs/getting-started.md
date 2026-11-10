@@ -8,6 +8,8 @@ nav_order: 4
 
 This page is for developers using the Java API. To try Uzzo from the NetBeans
 IDE, see the [NetBeans plugin](https://stefanofornari.github.io/nb-uzzo-workflow/).
+To install the Uzzo workflow skills in GitHub Copilot, Claude Code, or OpenCode,
+see [Installing skills](installing-skills).
 
 ## Requirements
 
