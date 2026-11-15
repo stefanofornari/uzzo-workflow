@@ -24,6 +24,9 @@ All content is available as classpath resources under `/uzz/`:
 - `uzz/skills/kb/` - knowledge base skill and references
 - `uzz/skills/uzzo-init/` - initialization templates and profiles
 
+The sources live in this module under `src/main/resources/uzz/`, so the module
+is self-contained and can be built independently of the parent repository.
+
 ## Usage
 
 Resources can be read directly from the classpath, e.g.

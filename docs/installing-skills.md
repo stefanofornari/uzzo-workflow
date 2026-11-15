@@ -128,9 +128,9 @@ installing.
 
 ## Notes
 
-- The canonical skill sources in this repository live under `src/main/uzz/skills/`
+- The canonical skill sources in this repository live under `uzzo-workflow-kb/src/main/resources/uzz/skills/`
   and are packaged by the `uzzo-workflow-kb` module. Installing from the jar
   gives the same content as a released artifact.
 - If you prefer to install directly from a checkout instead of Maven Central,
-  copy the contents of `src/main/uzz/skills/` into the same destination
+  copy the contents of `uzzo-workflow-kb/src/main/resources/uzz/skills/` into the same destination
   directories shown above.

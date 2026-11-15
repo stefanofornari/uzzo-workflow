@@ -32,7 +32,7 @@ the person who wants it. The standard format, popularized by Mike Cohn:
 Stories are produced to be INVEST-compliant with clear acceptance criteria and
 are the primary input of the **code** action. Each story lives in its own file
 in the [knowledge base](../knowledge-base), following the
-[story template](https://github.com/stefanofornari/uzzo-workflow/blob/main/src/main/uzz/skills/kb/references/user_story.md).
+[story template](https://github.com/stefanofornari/uzzo-workflow/blob/main/uzzo-workflow-kb/src/main/resources/uzz/skills/kb/references/user_story.md).
 
 ## References
 

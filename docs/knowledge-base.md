@@ -38,7 +38,7 @@ The KB has four top-level directories:
 ## Stories
 
 Each file in `stories/` holds exactly **one** user story, following the
-[story template](https://github.com/stefanofornari/uzzo-workflow/blob/main/src/main/uzz/skills/kb/references/user_story.md).
+[story template](https://github.com/stefanofornari/uzzo-workflow/blob/main/uzzo-workflow-kb/src/main/resources/uzz/skills/kb/references/user_story.md).
 Stories are grouped by domain (e.g. `stories/backend/`, `stories/frontend/`).
 
 - `stories/index.md` is a table of all stories (id and title) with their

@@ -63,7 +63,7 @@ happen, not specific tool names.
   [`references/templates.md`](references/templates.md). Read it before writing.
 - **Skill bundle** — the canonical workflow skills are the sibling directories
   of this skill (`../kb`, `../scope`, `../story`, `../code`, `../uzzo-init`),
-  or the equivalent `src/main/uzz/skills/` tree of the Uzzo Workflow
+  or the equivalent `uzzo-workflow-kb/src/main/resources/uzz/skills/` tree of the Uzzo Workflow
   distribution.
 
 If project facts are missing and the user is available, ask for at most three
@@ -152,10 +152,10 @@ Resolve the source in this order:
 
 1. The sibling directories of this skill (works when running from an installed
    knowledge base).
-2. The Uzzo Workflow source/distribution (`src/main/uzz/skills/` or packaged
+2. The Uzzo Workflow source/distribution (`uzzo-workflow-kb/src/main/resources/uzz/skills/` or packaged
    `uzz` resources).
 3. The upstream repository
-   `https://github.com/stefanofornari/uzzo-workflow/tree/main/src/main/uzz/skills`
+   `https://github.com/stefanofornari/uzzo-workflow/tree/main/uzzo-workflow-kb/src/main/resources/uzz/skills`
    when network access is available.
 4. If none are available, create a stub `SKILL.md` for each missing workflow
    skill using the stub template in `references/templates.md`, and clearly mark

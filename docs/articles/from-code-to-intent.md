@@ -34,7 +34,7 @@ The KB is organized into four top-level directories—`library/`, `project/`, `s
 
 Because the content is plain Markdown, it can be reviewed, versioned, diffed, and consumed by a wide range of tools. The knowledge base is therefore not tied to a single interface or runtime. It can remain useful as the surrounding tools evolve.
 
-That content is also shipped as a lean artifact, `uzzo-workflow-kb`, with no compile or runtime dependencies. A product engineer, a NetBeans plugin, or a CI pipeline can initialize a knowledge base from a known resource such as `/uzzo/skills/kb/SKILL.md` without bringing in the agent stack. The content evolves with the workflow, not with each consumer.
+That content is also shipped as a lean artifact, `uzzo-workflow-kb`, with no compile or runtime dependencies. A product engineer, a NetBeans plugin, or a CI pipeline can initialize a knowledge base from a known resource such as `/uzz/skills/kb/SKILL.md` without bringing in the agent stack. The content evolves with the workflow, not with each consumer.
 
 ## Keeping Control While Moving Fast
 

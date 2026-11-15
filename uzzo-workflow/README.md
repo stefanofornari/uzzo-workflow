@@ -58,7 +58,7 @@ directories:
 ### User Stories in the KB
 
 Each file in `stories/` contains exactly **one** user story, following the
-[story template](https://github.com/stefanofornari/uzzo-workflow/blob/main/src/main/uzz/skills/kb/references/user_story.md).
+[story template](https://github.com/stefanofornari/uzzo-workflow/blob/main/uzzo-workflow-kb/src/main/resources/uzz/skills/kb/references/user_story.md).
 Stories are organized into subdirectories by domain (e.g., `stories/backend/`,
 `stories/frontend/`). The file `stories/index.md` contains a table summarizing
 all user stories (id and title) and their status of development (`TODO`, `WIP`,

@@ -27,16 +27,6 @@
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <!-- src/main/uzz at the repository root is the single source of truth -->
-                <directory>${project.basedir}/../src/main/uzz</directory>
-                <targetPath>uzz</targetPath>
-                <excludes>
-                    <exclude>**/.DS_Store</exclude>
-                </excludes>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

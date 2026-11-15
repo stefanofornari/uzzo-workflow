@@ -52,7 +52,7 @@ public class UzzoScopeAgentTest {
     }
 
     @Test
-    void agent_system_prompt() {
+    void agent_system_prompt_comes_from_shared_skill_without_frontmatter() {
         final String prompt = "Build a scalable application with authentication and payments. "
             + "execute tool AskSingleChoice";
 
@@ -67,9 +67,9 @@ public class UzzoScopeAgentTest {
 
         then(response).isNotNull();
         then(msg.type()).isEqualTo(ChatMessageType.SYSTEM);
-        then(((SystemMessage)msg).text()).startsWith("# Skill: Scope Definition Reviewer");
-        then(((SystemMessage)msg).text()).contains("## Goal");
-        then(((SystemMessage)msg).text()).doesNotContain("name: scope-definition-reviewer");
+        then(((SystemMessage)msg).text()).startsWith("# Skill: Scope");
+        then(((SystemMessage)msg).text()).contains("## Pipeline");
+        then(((SystemMessage)msg).text()).doesNotContain("name: uzzo-scope");
     }
 
     @Test
