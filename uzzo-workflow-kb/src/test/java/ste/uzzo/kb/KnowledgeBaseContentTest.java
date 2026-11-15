@@ -39,7 +39,7 @@ public class KnowledgeBaseContentTest {
 
     @Test
     public void every_shipped_file_is_on_the_classpath_without_os_noise() throws IOException {
-        Path root = Paths.get("..", "src", "main", "uzz");
+        Path root = Paths.get("src", "main", "resources", "uzz");
 
         List<String> sources;
         try (Stream<Path> files = Files.walk(root)) {
