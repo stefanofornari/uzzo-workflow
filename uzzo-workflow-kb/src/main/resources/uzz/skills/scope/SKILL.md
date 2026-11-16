@@ -1,6 +1,6 @@
 ---
 name: uzzo-scope
-description: Scope a new feature or review an existing scope from a description or high-level requirements: interactivelly ask clarifying questions, fix in/out boundaries, and write a standard scope.md.
+description: Scope a new feature or review an existing scope from a description or high-level requirements; interactivelly ask clarifying questions, fix in/out boundaries, and write a standard scope.md.
 meta:
     version: "20261115"
 ---
