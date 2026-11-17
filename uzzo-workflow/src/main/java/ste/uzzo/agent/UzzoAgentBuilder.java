@@ -27,24 +27,26 @@ import ste.uzzo.agent.code.UzzoCodeAgent;
  */
 public class UzzoAgentBuilder {
 
+    private static final AgentSystemMessage SKILLS = new AgentSystemMessage();
+
     public static AiServices<UzzoScopeAgent> ScopeAgentBuilder() {
         return AiServices.builder(UzzoScopeAgent.class)
             .systemMessageProvider(
-                chatMemoryId -> AgentSystemMessage.loadSkill("uzz/skills/scope/SKILL.md")
+                chatMemoryId -> SKILLS.loadSkill("uzz/skills/scope/SKILL.md")
             );
     }
 
     public static AiServices<UzzoStoryAgent> StoryAgentBuilder() {
         return AiServices.builder(UzzoStoryAgent.class)
             .systemMessageProvider(
-                chatMemoryId -> AgentSystemMessage.loadSkill("uzz/skills/story/SKILL.md")
+                chatMemoryId -> SKILLS.loadSkill("uzz/skills/story/SKILL.md")
             );
     }
 
     public static AiServices<UzzoCodeAgent> CodeAgentBuilder() {
         return AiServices.builder(UzzoCodeAgent.class)
             .systemMessageProvider(
-                chatMemoryId -> AgentSystemMessage.loadSkill("uzz/skills/code/SKILL.md")
+                chatMemoryId -> SKILLS.loadSkill("uzz/skills/code/SKILL.md")
             );
     }
 }

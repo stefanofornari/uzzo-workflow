@@ -47,7 +47,7 @@ public class UzzoScopeAgentTest {
 
         agent = AiServices.builder(UzzoScopeAgent.class)
             .streamingChatModel(model)
-            .systemMessageProvider(chatMemoryId -> AgentSystemMessage.loadSkill("uzz/skills/scope/SKILL.md"))
+            .systemMessageProvider(chatMemoryId -> new AgentSystemMessage().loadSkill("uzz/skills/scope/SKILL.md"))
             .build();
     }
 
