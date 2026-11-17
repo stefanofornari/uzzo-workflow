@@ -1,36 +1,60 @@
 # Coding Standard
 
 ## Purpose
-
-[What this standard applies to and who must follow it.]
+This document defines the coding conventions for the Uzzo Workflow project.
 
 ## General Principles
-
 - Prefer clear, readable, and maintainable code.
+- Use OOP to model the domain and behaviour
 - Keep components small and focused.
-- Favour composition over duplication.
+- Favor composition over duplication.
 - Write code that is easy to test.
-- [Additional principle]
+- Keep UI logic separated from configuration and navigation logic where practical.
 
-## [LANGUAGE] Conventions
+## Java Conventions
+- Follow standard Java naming conventions for classes, methods, fields, and packages.
+- Use descriptive names for public APIs.
+- Keep methods short and single-purpose.
+- Prefer immutable data where practical.
+- Use explicit types when it improves readability.
+- Use final variables by default
+- Write class and method javadocs
+- Use modern fieldName() and fieldName(value) instead of getFieldName() and setFieldName()
+  for getters and setters of fields
 
-- [Naming, typing, immutability, visibility, or API convention]
-- [Additional convention]
+## JavaFX Conventions
+- Keep UI construction separate from business logic when possible.
+- Prefer reusable components for embeddable UI parts.
+- Avoid hard-coding provider-specific behavior into the core component.
+- Ensure UI state changes are predictable and testable.
 
 ## Testing Conventions
-
-- [Test framework and assertion style]
-- [Test naming convention]
-- [Coverage or mocking policy]
+- Use JUnit 5 for tests.
+- Use AssertJ with BDD style assertions via `then()` rather than `assertThat()`.
+- Use TestFX for JavaFX UI testing.
+- Support headless test execution.
+- Test names must use snake_case format.
+- Prefer behavior-focused test names.
+- Use snake_case naming only for test method names.
 
 ## Documentation Conventions
+- Keep scope and framework documents aligned with implementation decisions.
+- Document public component behavior and configuration expectations.
 
-- [Javadoc/docstring, comment, or README expectations]
-- [Additional documentation rule]
+## Static Methods and Classes
+- Avoid static methods unless for specific needs (e.g. a singleton)
+- If some logic makes sense to be implemented as a standalone function, prefer
+  using an interface with default methods rather than static methods.
 
-### Keywords
-- coding-standard
-- conventions
-- style
-- quality
-- testing
+## Checking for null and safely running code on variables
+
+- Instead of explicit null checks (`if (obj == null)`), use the utility functions in `ste.lazyjava.safe.Safe`:
+  - `ifNotNull(obj, () -> { ... })` — Executes the Runnable if `obj` is **not null**.
+  - `ifNull(obj, () -> { ... })` — Executes the Runnable if `obj` is **null**.
+  - `ifNull(obj, () -> { ... }, () -> { ... })` — Executes the first Runnable if `obj` is **null**, otherwise executes the second Runnable.
+  - `safe(obj, (val) -> { ... })` — Executes the Consumer with `obj` as `val` only if `obj` is **not null**.
+
+- For argument validation, prefer the following methods from `ste.lazyjava.safe.Safe`:
+  - `requireNonNull(obj, paramName)` — Throws `IllegalArgumentException` with `paramName` if `obj` is **null**.
+  - `requireNonEmpty(str, paramName)` — Throws `IllegalArgumentException` with `paramName` if `str` is **null or empty** (length 0).
+  - `requireNonBlank(str, paramName)` — Throws `IllegalArgumentException` with `paramName` if `str` is **null, empty, or whitespace-only**.

@@ -28,7 +28,7 @@ This skill needs to: read files, create nested directories, and create/edit mark
 ### Step 1: Parse & Map Domains
 * **Ingest Assets**: Read and parse `scope.md` and `users.md`.
 * **Map Vectors**: Extract distinct functional domains, platform environments, constraints, and valid user roles.
-* **Derive Domain Codes**: If `scope.md` already labels functional domains explicitly, use those labels directly. Otherwise, derive short, stable, uppercase domain codes from the named submodules/components in the Overall Description and In-Scope Capabilities (e.g. a submodule called "BillingService" → `BILLING`). Group cross-cutting capabilities with no obvious owning submodule (e.g. a shared data model, persistence) under a `CORE` domain unless a clearer split is obvious. Before inventing a new domain code, check for an existing `uzz/stories/<DOMAIN>/` folder covering the same area and reuse it rather than creating a near-duplicate.
+* **Derive Domain Codes**: If `scope.md` already labels functional domains explicitly, use those labels directly. Otherwise, derive short, stable, lowercase domain codes from the named submodules/components in the Overall Description and In-Scope Capabilities (e.g. a submodule called "BillingService" → `billing`). Group cross-cutting capabilities with no obvious owning submodule (e.g. a shared data model, persistence) under a `core` domain unless a clearer split is obvious. Before inventing a new domain code, check for an existing `uzz/stories/<DOMAIN>/` folder covering the same area and reuse it rather than creating a near-duplicate.
 
 ### Step 2: Story Decomposition
 * **Slice Vertically**: Evaluate every in-scope functional domain. Slice capabilities into the smallest independent blocks that provide direct business value.
@@ -47,13 +47,13 @@ This skill needs to: read files, create nested directories, and create/edit mark
 ### Step 4: Review and Update index.md
 After a user story writing/updating session, update `uzz/stories/index.md` so it reflects the current state:
 - One section per domain, domain name as a second-level heading.
-- In each section, a table of that domain's stories: `id | title | status`, where status is one of the value defined in User Story Standard Reference. New stories default to `TODO`; preserve the existing status of any story already in the index.
+- In each section, a table of that domain's stories: `id | title | status`, where status is one of the values defined in User Story Standard Reference. New stories default to `TODO`; preserve the existing status of any story already in the index.
 
 ---
 
 ## 📄 Output File Template
 
-For the full template, field specifications, INVEST principles, identifier format, Gherkin acceptance criteria rules, scope compliance, conflict resolution, and README maintenance standards, refer to the shared reference:
+For the full template, field specifications, INVEST principles, identifier format, Gherkin acceptance criteria rules, scope compliance, conflict resolution, and index maintenance standards, refer to the shared reference:
 
 → **[User Story Standard Reference](../kb/references/user_story.md)**
 

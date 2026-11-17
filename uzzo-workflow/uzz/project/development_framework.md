@@ -7,9 +7,10 @@
 ## Technology Stack
 
 - **Language / Runtime**: [LANGUAGE AND VERSION]
-- **Frameworks / Libraries**: [FRAMEWORKS]
+- **Frameworks / Libraries**:
+  - com.github.stefanofornari:easyjava-core for Safe code execution (see ../library/lazyjava/README.md)
 - **Build Tool**: Maven
-- **Test Tools**: [TEST TOOLS]
+- **Test Tools**: JUnit5
 
 ## Development Workflow
 

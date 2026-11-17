@@ -1,7 +1,7 @@
 # Coding Standard
 
 ## Purpose
-This document defines the coding conventions for the Quick Question project.
+This document defines the coding conventions for the Uzzo Workflow project.
 
 ## General Principles
 - Prefer clear, readable, and maintainable code.
@@ -48,13 +48,13 @@ This document defines the coding conventions for the Quick Question project.
 
 ## Checking for null and safely running code on variables
 
-- Instead of explicit null checks (`if (obj == null)`), use the utility functions in `ste.ai.viber.util.Safe`:
+- Instead of explicit null checks (`if (obj == null)`), use the utility functions in `ste.lazyjava.safe.Safe`:
   - `ifNotNull(obj, () -> { ... })` — Executes the Runnable if `obj` is **not null**.
   - `ifNull(obj, () -> { ... })` — Executes the Runnable if `obj` is **null**.
   - `ifNull(obj, () -> { ... }, () -> { ... })` — Executes the first Runnable if `obj` is **null**, otherwise executes the second Runnable.
   - `safe(obj, (val) -> { ... })` — Executes the Consumer with `obj` as `val` only if `obj` is **not null**.
 
-- For argument validation, prefer the following methods from `ste.ai.viber.util.Safe`:
+- For argument validation, prefer the following methods from `ste.lazyjava.safe.Safe`:
   - `requireNonNull(obj, paramName)` — Throws `IllegalArgumentException` with `paramName` if `obj` is **null**.
   - `requireNonEmpty(str, paramName)` — Throws `IllegalArgumentException` with `paramName` if `str` is **null or empty** (length 0).
   - `requireNonBlank(str, paramName)` — Throws `IllegalArgumentException` with `paramName` if `str` is **null, empty, or whitespace-only**.

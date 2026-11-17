@@ -1,6 +1,6 @@
 ---
-name: uzzo-story
-description: Safely and systematically evaluates, plans, and implements a vertical user story using TDD while updating an active notes.md file and the story's status. Use whenever the user asks to implement, build, or code up a user story (especially one produced by user-story-generator), or asks to work a story from spec to tested code.
+name: uzzo-code
+description: Safely and systematically evaluates, plans, and implements a vertical user story using TDD while updating an active notes.md file and the story's status. Use whenever the user asks to implement, build, or code up a user story (especially one produced by uzzo-story), or asks to work a story from spec to tested code.
 metadata:
   version: "20260929"
 ---
@@ -13,7 +13,7 @@ Safely and systematically implement a user story from specification to tested co
 This skill needs to: read and edit files, create files, list directories, and run shell/build commands (to execute the test suite). Use whichever such tools are available in the current environment.
 
 ## Input Requirements
-- A target user story identified by its ID (e.g. `AUTH/US-000012`), located at `uzz/stories/[DOMAIN]/[US-ID]/[US-ID].md`, with its title, description, and BDD acceptance criteria.
+- A target user story identified by its ID (e.g. `auth/US-000012`), located at `uzz/stories/[DOMAIN]/[US-ID]/[US-ID].md`, with its title, description, and BDD acceptance criteria.
 - Project context: `scope.md`, plus the coding-standard and development-framework docs it points to under "Project Reference Docs" (fall back to the project's own convention if `scope.md` doesn't specify one).
 
 ---

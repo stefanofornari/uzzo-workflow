@@ -22,7 +22,7 @@ The knowledge base consists of articles written in Markdown, organized into four
 
 - **No direct root files**: Do not place articles directly under the root folder. All articles must reside within `library/`, `project/`, `stories/`, or their subdirectories.
 - **Subdirectories**: Categorize articles into nested subdirectories under the main folders as appropriate.
-- **Full Relative Path References**: Identify and reference articles by their complete relative path (e.g., `stories/authentication/US101-dark-mode.md`).
+- **Full Relative Path References**: Identify and reference articles by their complete relative path (e.g., `stories/auth/US-000101/US-000101.md`).
 - **Keywords Requirement**: Every knowledge base article MUST conclude with a `### Keywords` section containing relevant search and categorization tags.
 
 ---

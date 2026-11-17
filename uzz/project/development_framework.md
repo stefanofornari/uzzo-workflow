@@ -1,7 +1,7 @@
 # Development Framework
 
 ## Purpose
-This document defines the development framework and workflow for the Quick Question project.
+This document defines the development framework and workflow for the Uzzo Workflow project.
 
 ## Technology Stack
 - Java

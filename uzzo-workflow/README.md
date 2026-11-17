@@ -74,7 +74,7 @@ capturing constraints and main design decisions.
 
 ### Scope
 
-`UzzoScopeAgent` / `ScopeAgentService`:
+`UzzoScopeAgent` (see `UzzoAgentBuilder.ScopeAgentBuilder()`):
 
 - Accepts free-text prompts (rough user stories or a rough description of a
   feature or goal)
@@ -138,9 +138,8 @@ tested code using the project context in the knowledge base.
 | `UzzoStoryAgent` | LangChain4j AI service interface for user-story generation |
 | `UzzoCodeAgent` | LangChain4j AI service interface for story implementation |
 | `UzzoAgentBuilder` | Builders configuring agents with skills, chat memory, and tools |
-| `ScopeAgentService` | Provider that builds/configures the scope agent with chat memory and tools |
 | `AskTools` | Interface for user interaction (questions, choices, confirmations) |
-| `Safe` | Utility for input validation |
+| `Safe` | Input validation mixin from `lazyjava-core`, implemented by the agent interfaces |
 
 ## Requirements
 
@@ -166,13 +165,17 @@ mvn test
 
 ```java
 // Configure your LLM provider
-ChatModel chatModel = ... // e.g., OpenAI, Anthropic, Ollama
+StreamingChatModel chatModel = ... // e.g., OpenAI, Anthropic, Ollama
 
 // Implement AskTools for your platform (CLI, web, GUI)
 AskTools tools = new MyAskToolsImplementation();
 
-// Create the scope service
-ScopeAgentService agent = new ScopeAgentService(chatModel, tools);
+// Create the scope agent
+UzzoScopeAgent agent = UzzoAgentBuilder.ScopeAgentBuilder()
+    .streamingChatModel(chatModel)
+    .chatMemory(MessageWindowChatMemory.withMaxMessages(20))
+    .tools(tools)
+    .build();
 ```
 
 ### Running Scope Analysis
@@ -184,9 +187,13 @@ String prompt = """
     Architecture: microservices with REST API.
     """;
 
-String response = agent.scope(prompt);
-// Agent will ask clarifying questions if gaps are detected
-// Returns structured scope document when complete
+agent.scope(prompt)
+    .onPartialResponse(System.out::print)
+    .onCompleteResponse(response -> { })
+    .onError(Throwable::printStackTrace)
+    .start();
+// The agent asks clarifying questions through AskTools if gaps are detected
+// and streams a structured scope document when complete
 ```
 
 ### Story and Code actions

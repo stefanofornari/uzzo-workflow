@@ -8,7 +8,7 @@ nav_order: 1
 # Scope action
 
 The **scope** action performs interactive gap analysis and boundary definition
-via `UzzoScopeAgent` (and `ScopeAgentService`). The agent:
+via `UzzoScopeAgent` (built with `UzzoAgentBuilder.ScopeAgentBuilder()`). The agent:
 
 - accepts free-text prompts: rough user stories, or a rough description of a
   feature or goal
@@ -41,9 +41,9 @@ in parallel with clear boundaries.
 | Component | Description |
 |-----------|-------------|
 | `UzzoScopeAgent` | LangChain4j AI service interface defining the scope analysis contract |
-| `ScopeAgentService` | Concrete provider that builds and configures the agent with chat memory and tools |
+| `UzzoAgentBuilder` | Builders that bind each agent to its skill; the host adds chat model, memory and tools |
 | `AskTools` | Interface for user interaction (questions, choices, confirmations) |
-| `Safe` | Utility for input validation |
+| `Safe` | Input validation mixin from `lazyjava-core`, implemented by the agent interfaces |
 
 ## Scope document output
 
