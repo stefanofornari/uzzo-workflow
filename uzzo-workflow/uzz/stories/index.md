@@ -23,7 +23,7 @@
 | [ask/US-000007](ask/US-000007/US-000007.md) | Let the Agent Ask the User an Open-Ended Question | DONE |
 | [ask/US-000008](ask/US-000008/US-000008.md) | Let the Agent Offer the User a Choice | WIP |
 | [ask/US-000009](ask/US-000009/US-000009.md) | Let the Agent Ask the User for Confirmation | WIP |
-| [ask/US-000010](ask/US-000010/US-000010.md) | Tell the Model When the User Has No Answer | WIP |
+| [ask/US-000010](ask/US-000010/US-000010.md) | Tell the Model When the User Has No Answer | DONE |
 
 ### Keywords
 - stories
