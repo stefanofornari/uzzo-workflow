@@ -53,7 +53,7 @@ The result is a durable, versionable document that humans and agents can both re
 
 ## Extensible by Design
 
-Uzzo Workflow does not assume a single user interface. The `AskTools` interface—`askQuestion`, `askSingleChoice`, `askMultipleChoice`, and `askConfirmation`—lets the same agent run in a CLI, a web app, a GUI, or a test harness. Platform-specific interaction is injected rather than hard-coded, so the workflow logic remains portable. A `Safe` utility handles input validation, and the scope document output is standardized Markdown.
+Uzzo Workflow does not assume a single user interface. The `AskTools` interface—`askQuestion`, `askSingleChoice`, `askMultipleChoice`, and `askConfirmation`—lets the same agent run in a CLI, a web app, a GUI, or a test harness. Platform-specific interaction is injected rather than hard-coded, so the workflow logic remains portable. Input validation comes from the `Safe` mixin of `lazyjava-core`, and the scope document output is standardized Markdown.
 
 No single tool or interface will own software development, so product owners and product engineers should be able to work where they already work, while different tools read from and write to the same knowledge base.
 

@@ -3,7 +3,7 @@
 ## Identity
 
 - **Name**: Uzzo Workflow
-- **Version**: 0.0.0
+- **Version**: 0.0.2-SNAPSHOT
 - **Summary**: LangChain4j extensions to Uzzo Workflow
 
 ## Team & Roles

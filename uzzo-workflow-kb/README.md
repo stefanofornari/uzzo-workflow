@@ -12,7 +12,7 @@ dependencies.
 <dependency>
     <groupId>com.github.stefanofornari</groupId>
     <artifactId>uzzo-workflow-kb</artifactId>
-    <version>0.0.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
 </dependency>
 ```
 
