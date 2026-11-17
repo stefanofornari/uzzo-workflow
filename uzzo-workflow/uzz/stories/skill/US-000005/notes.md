@@ -4,7 +4,7 @@
 - The "resource cannot be read" scenario is kept as a real requirement: the classpath is controlled by the host or framework, so such failures are realistic.
 - Breaking change: `AgentSystemMessage.loadSkill` is no longer static; callers use `new AgentSystemMessage().loadSkill(...)`. `UzzoAgentBuilder` shares one instance.
 - Open question: whether the exception surfaces when the agent method is called or only when the returned `TokenStream` is started has not been verified or specified.
-- Tests written without Maven access; run `mvn test -pl uzzo-workflow` and set the story to `DONE` in `index.md` if green.
+- Tests run by the developer: green.
 
 ### Keywords
 - notes

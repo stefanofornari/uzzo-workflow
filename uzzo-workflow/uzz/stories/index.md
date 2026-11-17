@@ -13,7 +13,7 @@
 | id | title | status |
 |----|-------|--------|
 | [skill/US-000004](skill/US-000004/US-000004.md) | Use a Skill as the Agent System Prompt | DONE |
-| [skill/US-000005](skill/US-000005/US-000005.md) | Fail Clearly When a Skill Is Missing or Unreadable | WIP |
+| [skill/US-000005](skill/US-000005/US-000005.md) | Fail Clearly When a Skill Is Missing or Unreadable | DONE |
 | [skill/US-000006](skill/US-000006/US-000006.md) | Get a Skill-Bound Agent Builder for Each Workflow Action | DONE |
 
 ## ask
