@@ -28,13 +28,17 @@ mvn test
 
 ```java
 // Configure your LLM provider
-ChatModel chatModel = ... // e.g., OpenAI, Anthropic, Ollama
+StreamingChatModel chatModel = ... // e.g., OpenAI, Anthropic, Ollama
 
 // Implement AskTools for your platform (CLI, web, GUI)
 AskTools tools = new MyAskToolsImplementation();
 
-// Create the service
-ScopeAgentService agent = new ScopeAgentService(chatModel, tools);
+// Create the agent
+UzzoScopeAgent agent = UzzoAgentBuilder.ScopeAgentBuilder()
+    .streamingChatModel(chatModel)
+    .chatMemory(MessageWindowChatMemory.withMaxMessages(20))
+    .tools(tools)
+    .build();
 ```
 
 ## Running a scope analysis
@@ -46,9 +50,13 @@ String prompt = """
     Architecture: microservices with REST API.
     """;
 
-String response = agent.scope(prompt);
+agent.scope(prompt)
+    .onPartialResponse(System.out::print)
+    .onCompleteResponse(response -> { })
+    .onError(Throwable::printStackTrace)
+    .start();
 // The agent asks clarifying questions if it detects gaps,
-// and returns a structured scope document when complete.
+// and streams a structured scope document when complete.
 ```
 
 ## Implementing AskTools

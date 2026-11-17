@@ -38,11 +38,11 @@ Functional domains:
 * Concrete `AskTools` implementations for CLI, GUI or web: the host application provides them
 * Choosing, configuring or authenticating the LLM provider, and chat memory configuration: the host provides the chat model and memory
 * Writing, saving or updating `scope.md`, user story files, `index.md` or code on disk: the agents only produce the conversation; file operations are done by tools provided by the host
-* A concrete `ScopeAgentService` provider class: it is mentioned in the README and docs, but it is not part of this module
+* A concrete provider class that wires model, memory and tools for the host (such as the former `ScopeAgentService`): hosts build agents with `UzzoAgentBuilder`
 * The Knowledge Base content (skills, templates, standards): it is owned and shipped by the `uzzo-workflow-kb` module
 * Authoring or changing the skill texts themselves
 * A non-streaming (`String`) response API
-* Any Maven `exec` or command line entry point
+* Any command line or `main` entry point
 * Multi-session scope refinement or scope versioning
 * Integration with version control systems or project management tools
 
