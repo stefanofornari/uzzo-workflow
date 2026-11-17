@@ -17,8 +17,10 @@
 package ste.uzzo.agent;
 
 import static org.assertj.core.api.BDDAssertions.then;
+import static org.assertj.core.api.BDDAssertions.thenThrownBy;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import dev.langchain4j.data.message.ChatMessage;
 import dev.langchain4j.data.message.ChatMessageType;
@@ -85,7 +87,49 @@ public class UzzoAgentBuilderTest {
             .contains("## Execution Pipeline");
     }
 
+    @Test
+    void scope_agent_fails_when_the_scope_skill_is_missing() {
+        final UzzoScopeAgent agent = UzzoAgentBuilder.ScopeAgentBuilder(withoutSkills())
+            .streamingChatModel(model)
+            .build();
+
+        thenThrownBy(() -> agent._scope_("Create a REST API"))
+            .isInstanceOf(IllegalStateException.class)
+            .hasMessage("Missing system prompt resource: uzz/skills/scope/SKILL.md");
+    }
+
+    @Test
+    void story_agent_fails_when_the_story_skill_is_missing() {
+        final UzzoStoryAgent agent = UzzoAgentBuilder.StoryAgentBuilder(withoutSkills())
+            .streamingChatModel(model)
+            .build();
+
+        thenThrownBy(() -> agent._stories_("Generate stories from the provided scope."))
+            .isInstanceOf(IllegalStateException.class)
+            .hasMessage("Missing system prompt resource: uzz/skills/story/SKILL.md");
+    }
+
+    @Test
+    void code_agent_fails_when_the_code_skill_is_missing() {
+        final UzzoCodeAgent agent = UzzoAgentBuilder.CodeAgentBuilder(withoutSkills())
+            .streamingChatModel(model)
+            .build();
+
+        thenThrownBy(() -> agent._implement_("Implement user story auth/US-000012"))
+            .isInstanceOf(IllegalStateException.class)
+            .hasMessage("Missing system prompt resource: uzz/skills/code/SKILL.md");
+    }
+
     // --------------------------------------------------------- private methods
+
+    private AgentSystemMessage withoutSkills() {
+        return new AgentSystemMessage() {
+            @Override
+            protected InputStream resolve(final String resource) {
+                return null;
+            }
+        };
+    }
 
     private void invoke(final TokenStream stream) {
         final TokenStream response = stream

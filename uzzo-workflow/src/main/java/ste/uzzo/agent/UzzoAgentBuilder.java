@@ -30,23 +30,47 @@ public class UzzoAgentBuilder {
     private static final AgentSystemMessage SKILLS = new AgentSystemMessage();
 
     public static AiServices<UzzoScopeAgent> ScopeAgentBuilder() {
+        return ScopeAgentBuilder(SKILLS);
+    }
+
+    /**
+     * Same as {@link #ScopeAgentBuilder()}, but the skill is loaded through the given
+     * {@link AgentSystemMessage}, so that a host can change where skills come from.
+     */
+    public static AiServices<UzzoScopeAgent> ScopeAgentBuilder(final AgentSystemMessage skills) {
         return AiServices.builder(UzzoScopeAgent.class)
             .systemMessageProvider(
-                chatMemoryId -> SKILLS.loadSkill("uzz/skills/scope/SKILL.md")
+                chatMemoryId -> skills.loadSkill("uzz/skills/scope/SKILL.md")
             );
     }
 
     public static AiServices<UzzoStoryAgent> StoryAgentBuilder() {
+        return StoryAgentBuilder(SKILLS);
+    }
+
+    /**
+     * Same as {@link #StoryAgentBuilder()}, but the skill is loaded through the given
+     * {@link AgentSystemMessage}, so that a host can change where skills come from.
+     */
+    public static AiServices<UzzoStoryAgent> StoryAgentBuilder(final AgentSystemMessage skills) {
         return AiServices.builder(UzzoStoryAgent.class)
             .systemMessageProvider(
-                chatMemoryId -> SKILLS.loadSkill("uzz/skills/story/SKILL.md")
+                chatMemoryId -> skills.loadSkill("uzz/skills/story/SKILL.md")
             );
     }
 
     public static AiServices<UzzoCodeAgent> CodeAgentBuilder() {
+        return CodeAgentBuilder(SKILLS);
+    }
+
+    /**
+     * Same as {@link #CodeAgentBuilder()}, but the skill is loaded through the given
+     * {@link AgentSystemMessage}, so that a host can change where skills come from.
+     */
+    public static AiServices<UzzoCodeAgent> CodeAgentBuilder(final AgentSystemMessage skills) {
         return AiServices.builder(UzzoCodeAgent.class)
             .systemMessageProvider(
-                chatMemoryId -> SKILLS.loadSkill("uzz/skills/code/SKILL.md")
+                chatMemoryId -> skills.loadSkill("uzz/skills/code/SKILL.md")
             );
     }
 }

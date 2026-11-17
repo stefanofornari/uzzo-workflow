@@ -1,7 +1,8 @@
 # Notes — skill/US-000006
 
-- The "skill missing from the classpath" scenario was removed from this story: `UzzoAgentBuilder` hard-codes the skill paths, so it cannot be tested through the builders without a refactoring that this story does not need. The behaviour belongs to `AgentSystemMessage.loadSkill` and is specified in skill/US-000005.
-- `UzzoAgentBuilderTest` was written against the same `DummyStreamingChatModel` / `DummyChatModelListener` pattern used by the agent tests. It was written in a session without Maven access and then run by the developer: green.
+- The "skill missing from the classpath" scenario was dropped by mistake and put back. It became testable once `AgentSystemMessage` got its `resolve()` extension point (skill/US-000005): the builders now have overloads taking an `AgentSystemMessage`.
+- The exception surfaces at the agent method call, not at `TokenStream.start()`: confirmed by the tests.
+- `UzzoAgentBuilderTest` was written against the same `DummyStreamingChatModel` / `DummyChatModelListener` pattern used by the agent tests. The three skill-binding tests were run by the developer: green. The three missing-skill tests were run too: green.
 
 ### Keywords
 - notes
