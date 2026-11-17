@@ -1,5 +1,5 @@
 ---
-name: implement-user-story
+name: uzzo-story
 description: Safely and systematically evaluates, plans, and implements a vertical user story using TDD while updating an active notes.md file and the story's status. Use whenever the user asks to implement, build, or code up a user story (especially one produced by user-story-generator), or asks to work a story from spec to tested code.
 metadata:
   version: "20260929"

@@ -1,8 +1,8 @@
 ---
 name: uzzo-scope
-description: Scope a new feature or review an existing scope from a description or high-level requirements; interactivelly ask clarifying questions, fix in/out boundaries, and write a standard scope.md.
-meta:
-    version: "20261115"
+description: Scope a new feature or review an existing scope from a description or high-level requirements; interactively ask clarifying questions, fix in/out boundaries, and write a standard scope.md.
+metadata:
+    version: "20261117"
 ---
 
 # Skill: Scope
@@ -35,7 +35,6 @@ Look at what already exists, in particular using skill `uzzo-kb`, if available: 
 Partition all discussed capabilities into two mutually exclusive groups:
 - In-Scope Capabilities: Features, platforms, and behaviors that MUST be delivered in the current implementation cycle.
 - Out-of-Scope / Future Enhancements: Features explicitly deferred, nice-to-haves, or ideas that will cause scope creep. Treat anything not explicitly listed as in-scope as out-of-scope by default.
-.
 
 ### 4. Review checks (always, and the whole job in Review mode)
 - **Gaps**: a flow with no failure behaviour, no default, no limit, or no owner.
@@ -69,6 +68,10 @@ Put the file where the project keeps scopes (typically a `scope.md` in the domai
 * **Project Reference Docs**:
   - Coding Standard: `<path or link>`
   - Development Framework: `<path or link>`
+
+### Keywords
+* keyword1
+* ...
 ```
 
 If the user has not asked for the file yet, show the scope in the reply and offer to save it. Update the main scope file with a link to a new domain scope.
