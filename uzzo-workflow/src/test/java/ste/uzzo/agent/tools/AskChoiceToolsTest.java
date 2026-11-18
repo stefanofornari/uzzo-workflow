@@ -24,143 +24,109 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dev.langchain4j.agent.tool.Tool;
-import dev.langchain4j.agent.tool.ToolExecutionRequest;
-import dev.langchain4j.data.message.AiMessage;
 import dev.langchain4j.data.message.ToolExecutionResultMessage;
-import dev.langchain4j.model.chat.StreamingChatModel;
-import dev.langchain4j.model.chat.request.ChatRequest;
-import dev.langchain4j.model.chat.response.ChatResponse;
-import dev.langchain4j.model.chat.response.StreamingChatResponseHandler;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ste.llm.tools.AbstractTool;
 import ste.uzzo.agent.UzzoAgentBuilder;
+import ste.xtest.llm.DummyChatModelListener;
+import ste.xtest.llm.DummyStreamingChatModel;
 
 /**
  * US-000008 - the agent can offer the user a choice (single or multiple) through
  * the AskSingleChoice and AskMultipleChoice tools.
  *
- * The tool calls are scripted with {@link ScriptedToolCallModel} instead of
- * DummyChatModel because the latter can only pass a single "prompt" argument,
- * while these tools take a question and a list of options.
+ * The tool calls are driven by DummyChatModel, which passes a JSON object given
+ * after "with arguments:" to the tool as it is (xtest 3.14.1 or later).
  */
 public class AskChoiceToolsTest {
 
     private static final String QUESTION = "Which platform?";
-    private static final String ARGUMENTS =
-        "{\"question\":\"Which platform?\",\"options\":[\"Web\",\"Mobile\",\"Desktop\"]}";
     private static final List<String> OPTIONS = List.of("Web", "Mobile", "Desktop");
+    private static final String ARGUMENTS =
+        "{\"question\": \"Which platform?\", \"options\": [\"Web\", \"Mobile\", \"Desktop\"]}";
+
+    private DummyStreamingChatModel model;
+    private DummyChatModelListener listener;
+
+    @BeforeEach
+    void beforeEach() throws IOException {
+        model = new DummyStreamingChatModel();
+        listener = new DummyChatModelListener();
+        model.addListener(listener);
+    }
 
     @Test
     void single_choice_tool_receives_question_and_options_and_returns_the_selected_option() throws IOException {
         final ChoiceAskTools tools = new ChoiceAskTools();
         tools.singleChoice = "Mobile";
-        final ScriptedToolCallModel model = new ScriptedToolCallModel(AskTools.ASK_SINGLE_CHOICE, ARGUMENTS);
 
-        ask(model, tools);
+        ask(tools, AskTools.ASK_SINGLE_CHOICE);
 
         then(tools.calls).containsExactly(AskTools.ASK_SINGLE_CHOICE);
         then(tools.question).isEqualTo(QUESTION);
         then(tools.options).isEqualTo(OPTIONS);
-        then(model.toolResult()).isEqualTo("Mobile");
+        then(toolResult()).isEqualTo("Mobile");
     }
 
     @Test
     void multiple_choice_tool_receives_question_and_options_and_returns_the_selected_options() throws IOException {
         final ChoiceAskTools tools = new ChoiceAskTools();
         tools.multipleChoice = List.of("Web", "Desktop");
-        final ScriptedToolCallModel model = new ScriptedToolCallModel(AskTools.ASK_MULTIPLE_CHOICE, ARGUMENTS);
 
-        ask(model, tools);
+        ask(tools, AskTools.ASK_MULTIPLE_CHOICE);
 
         then(tools.calls).containsExactly(AskTools.ASK_MULTIPLE_CHOICE);
         then(tools.question).isEqualTo(QUESTION);
         then(tools.options).isEqualTo(OPTIONS);
-        then(model.toolResult()).contains("Web").contains("Desktop").doesNotContain("Mobile");
+        then(toolResult()).contains("Web").contains("Desktop").doesNotContain("Mobile");
     }
 
     @Test
     void single_choice_without_an_answer_tells_the_model_there_is_no_answer() throws IOException {
         final ChoiceAskTools tools = new ChoiceAskTools();
         tools.failure = new NoAnswerException();
-        final ScriptedToolCallModel model = new ScriptedToolCallModel(AskTools.ASK_SINGLE_CHOICE, ARGUMENTS);
 
-        ask(model, tools);
+        ask(tools, AskTools.ASK_SINGLE_CHOICE);
 
         then(tools.calls).containsExactly(AskTools.ASK_SINGLE_CHOICE);
-        then(model.toolResult()).isEqualTo("<NO ANSWER PROVIDED>");
+        then(toolResult()).isEqualTo("<NO ANSWER PROVIDED>");
     }
 
     @Test
     void multiple_choice_without_an_answer_tells_the_model_there_is_no_answer() throws IOException {
         final ChoiceAskTools tools = new ChoiceAskTools();
         tools.failure = new NoAnswerException();
-        final ScriptedToolCallModel model = new ScriptedToolCallModel(AskTools.ASK_MULTIPLE_CHOICE, ARGUMENTS);
 
-        ask(model, tools);
+        ask(tools, AskTools.ASK_MULTIPLE_CHOICE);
 
         then(tools.calls).containsExactly(AskTools.ASK_MULTIPLE_CHOICE);
-        then(model.toolResult()).isEqualTo("<NO ANSWER PROVIDED>");
+        then(toolResult()).isEqualTo("<NO ANSWER PROVIDED>");
     }
 
     // --------------------------------------------------------- private methods
 
-    private void ask(final StreamingChatModel model, final AskTools tools) {
+    private void ask(final AskTools tools, final String tool) {
         UzzoAgentBuilder.ScopeAgentBuilder()
             .streamingChatModel(model)
             .tools(tools)
             .build()
-            .scope("Build a scalable application with authentication and payments.")
+            .scope("Build a scalable application. execute tool " + tool + " with arguments: " + ARGUMENTS)
             .onPartialResponse(s -> {})
             .onCompleteResponse(r -> {})
             .ignoreErrors()
             .start();
     }
 
-    // ----------------------------------------------------------- inner classes
-
-    /**
-     * A model that, on its first turn, asks to execute the given tool with the
-     * given JSON arguments, and on the next turn just answers "done". It keeps
-     * the requests it received.
-     */
-    static class ScriptedToolCallModel implements StreamingChatModel {
-
-        private final String tool;
-        private final String arguments;
-        private final List<ChatRequest> requests = new ArrayList<>();
-
-        ScriptedToolCallModel(final String tool, final String arguments) {
-            this.tool = tool;
-            this.arguments = arguments;
-        }
-
-        @Override
-        public void doChat(final ChatRequest request, final StreamingChatResponseHandler handler) {
-            requests.add(request);
-
-            final boolean toolExecuted = request.messages().stream()
-                .anyMatch(ToolExecutionResultMessage.class::isInstance);
-
-            final AiMessage reply = toolExecuted
-                ? AiMessage.from("done")
-                : AiMessage.from(
-                    ToolExecutionRequest.builder().id("1").name(tool).arguments(arguments).build()
-                );
-
-            handler.onCompleteResponse(ChatResponse.builder().aiMessage(reply).build());
-        }
-
-        /**
-         * @return the text of the tool result sent back to the model, or null
-         */
-        String toolResult() {
-            return requests.get(requests.size() - 1).messages().stream()
-                .filter(ToolExecutionResultMessage.class::isInstance)
-                .map(message -> ((ToolExecutionResultMessage)message).text())
-                .findFirst()
-                .orElse(null);
-        }
+    private String toolResult() {
+        return listener.lastRequestContext.get().chatRequest().messages().stream()
+            .filter(ToolExecutionResultMessage.class::isInstance)
+            .map(message -> ((ToolExecutionResultMessage)message).text())
+            .findFirst()
+            .orElse(null);
     }
+
+    // ----------------------------------------------------------- inner classes
 
     /**
      * An AskTools implementation that records what it is asked and answers with
