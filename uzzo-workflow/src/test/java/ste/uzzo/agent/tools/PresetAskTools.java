@@ -28,17 +28,17 @@ import ste.llm.tools.AbstractTool;
  * An AskTools implementation for tests: it records what it is asked and answers
  * with preset values, or fails with the preset exception.
  */
-class PresetAskTools extends AbstractTool implements AskTools {
+public class PresetAskTools extends AbstractTool implements AskTools {
 
-    final List<String> calls = new ArrayList<>();
-    String question;
-    List<String> options;
-    String singleChoice;
-    List<String> multipleChoice;
-    boolean confirmation;
-    RuntimeException failure;
+    public final List<String> calls = new ArrayList<>();
+    public String question;
+    public List<String> options;
+    public String singleChoice;
+    public List<String> multipleChoice;
+    public boolean confirmation;
+    public RuntimeException failure;
 
-    PresetAskTools() throws IOException {
+    public PresetAskTools() throws IOException {
         super(new File(".").getAbsolutePath());
     }
 
