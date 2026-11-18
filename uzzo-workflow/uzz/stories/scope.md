@@ -11,7 +11,7 @@ Functional domains:
 - **Agent Contracts**: the `UzzoScopeAgent`, `UzzoStoryAgent` and `UzzoCodeAgent` AI Service interfaces and their input validation
 - **Skill-Based System Prompts**: loading a skill from the classpath as the agent's system message, and the builders that wire each agent to its skill
 - **User Interaction Tools**: the `AskTools` contract that lets an agent ask the user questions, and the way a missing answer is reported back to the model
-- **Knowledge Base Skill Access**: making the Knowledge Base management skill (`kb-man`) available to every agent through the LangChain4j Skills tool mode, so that the model can activate it on demand
+- **Knowledge Base Skill Access**: making the Knowledge Base management skill (`uzzo-kb`) available to every agent through the LangChain4j Skills tool mode, so that the model can activate it on demand
 
 ## In-Scope Capabilities
 
@@ -35,10 +35,10 @@ Functional domains:
   - [x] Provide `NoAnswerException`, visible to the model, whose message defaults to `<NO ANSWER PROVIDED>` and can be customized
 
 * **Knowledge Base Skill Access**:
-  - [ ] Build the `kb-man` skill from its classpath resource (`uzz/skills/kb/SKILL.md`, shipped by `uzzo-workflow-kb`), so that it works from inside a jar, reusing the existing skill loading and frontmatter handling
+  - [ ] Build the `uzzo-kb` skill from its classpath resource (`uzz/skills/uzzo-kb/SKILL.md`, shipped by `uzzo-workflow-kb` 0.0.1-SNAPSHOT), so that it works from inside a jar, reusing the existing skill loading and frontmatter handling
   - [ ] Wire it into all three agents (scope, story, code) in Tool Mode: `UzzoAgentBuilder` sets the `Skills` tool provider (the `activate_skill` tool) on each `AiServices` and adds the skill catalogue to the agent's system message, after the agent's own skill
   - [ ] Always on: hosts need no extra call, and tools added by the host with `.tools(...)` keep working next to the skill tools
-  - [ ] Fail with a clear error when the `kb-man` skill resource is missing, like the agents' own skills
+  - [ ] Fail with a clear error when the `uzzo-kb` skill resource is missing, like the agents' own skills
 
 ## Out-of-Scope / Future Enhancements
 
@@ -51,10 +51,10 @@ Functional domains:
 * A non-streaming (`String`) response API
 * Any command line or `main` entry point
 * LangChain4j Skills Shell Mode (`run_shell_command`, experimental and unsafe): only Tool Mode is used
-* Exposing skills other than `kb-man` (`scope`, `story`, `code`, `uzzo-init`) through the Skills mechanism; they stay the agents' system prompts
+* Exposing skills other than `uzzo-kb` (`scope`, `story`, `code`, `uzzo-init`) through the Skills mechanism; they stay the agents' system prompts
 * An opt-out or opt-in switch for the KB skill: it is always on
 * File system skills: the skill is loaded from the classpath, no skill directory is read from or extracted to disk
-* The file operations that `kb-man` describes: they need tools provided by the host
+* The file operations that `uzzo-kb` describes: they need tools provided by the host
 * Multi-session scope refinement or scope versioning
 * Integration with version control systems or project management tools
 
@@ -63,7 +63,7 @@ Functional domains:
 * **Development Toolchain**: Java 21, Maven (multi-module build with `uzzo-workflow-kb` and `uzzo-workflow`), TDD with JUnit 5, AssertJ (BDD style) and xtest
 * **Agent Capability Framework**: LangChain4j 1.21.0 (AI Services, `TokenStream`, tools / function calling, `ToolErrorVisibleToLlm`)
 * **Skills Support**: LangChain4j Skills (`Skills`, `Skills.toolProvider()`, `formatAvailableSkills()`, `activate_skill`) in Tool Mode; to be verified: which artifact and version of LangChain4j provide `dev.langchain4j.skill` (1.21.0 or a separate module) and how to define a skill programmatically from text
-* **Key Dependencies**: `uzzo-workflow-kb` (skills as classpath resources), `uzzo-llm` (`ste.llm.tools.Tool`), `lazyjava-core` (`Safe`), `xtest` (`DummyStreamingChatModel`, `DummyChatModelListener`) for tests
+* **Key Dependencies**: `uzzo-workflow-kb` 0.0.1-SNAPSHOT (skills as classpath resources, including `uzzo-kb`), `uzzo-llm` (`ste.llm.tools.Tool`), `lazyjava-core` (`Safe`), `xtest` (`DummyStreamingChatModel`, `DummyChatModelListener`) for tests
 * **Target Systems/Platforms**: any JVM host application (e.g. ViberFX desktop, ViberCLI terminal) that supplies a streaming chat model and `AskTools`
 * **Project Reference Docs**:
   - Project Overview: `uzz/project/overview.md`
@@ -79,7 +79,7 @@ Functional domains:
 - agents
 - langchain4j
 - skills
-- kb-man
+- uzzo-kb
 - tool-mode
 - activate-skill
 - ask-tools
