@@ -18,16 +18,12 @@ package ste.uzzo.agent.tools;
 
 import static org.assertj.core.api.BDDAssertions.then;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-import dev.langchain4j.agent.tool.Tool;
 import dev.langchain4j.data.message.ToolExecutionResultMessage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ste.llm.tools.AbstractTool;
 import ste.uzzo.agent.UzzoAgentBuilder;
 import ste.xtest.llm.DummyChatModelListener;
 import ste.xtest.llm.DummyStreamingChatModel;
@@ -58,7 +54,7 @@ public class AskChoiceToolsTest {
 
     @Test
     void single_choice_tool_receives_question_and_options_and_returns_the_selected_option() throws IOException {
-        final ChoiceAskTools tools = new ChoiceAskTools();
+        final PresetAskTools tools = new PresetAskTools();
         tools.singleChoice = "Mobile";
 
         ask(tools, AskTools.ASK_SINGLE_CHOICE);
@@ -71,7 +67,7 @@ public class AskChoiceToolsTest {
 
     @Test
     void multiple_choice_tool_receives_question_and_options_and_returns_the_selected_options() throws IOException {
-        final ChoiceAskTools tools = new ChoiceAskTools();
+        final PresetAskTools tools = new PresetAskTools();
         tools.multipleChoice = List.of("Web", "Desktop");
 
         ask(tools, AskTools.ASK_MULTIPLE_CHOICE);
@@ -84,7 +80,7 @@ public class AskChoiceToolsTest {
 
     @Test
     void single_choice_without_an_answer_tells_the_model_there_is_no_answer() throws IOException {
-        final ChoiceAskTools tools = new ChoiceAskTools();
+        final PresetAskTools tools = new PresetAskTools();
         tools.failure = new NoAnswerException();
 
         ask(tools, AskTools.ASK_SINGLE_CHOICE);
@@ -95,7 +91,7 @@ public class AskChoiceToolsTest {
 
     @Test
     void multiple_choice_without_an_answer_tells_the_model_there_is_no_answer() throws IOException {
-        final ChoiceAskTools tools = new ChoiceAskTools();
+        final PresetAskTools tools = new PresetAskTools();
         tools.failure = new NoAnswerException();
 
         ask(tools, AskTools.ASK_MULTIPLE_CHOICE);
@@ -124,63 +120,5 @@ public class AskChoiceToolsTest {
             .map(message -> ((ToolExecutionResultMessage)message).text())
             .findFirst()
             .orElse(null);
-    }
-
-    // ----------------------------------------------------------- inner classes
-
-    /**
-     * An AskTools implementation that records what it is asked and answers with
-     * preset values, or fails with the preset exception.
-     */
-    static class ChoiceAskTools extends AbstractTool implements AskTools {
-
-        final List<String> calls = new ArrayList<>();
-        String question;
-        List<String> options;
-        String singleChoice;
-        List<String> multipleChoice;
-        RuntimeException failure;
-
-        ChoiceAskTools() throws IOException {
-            super(new File(".").getAbsolutePath());
-        }
-
-        @Override
-        @Tool(name = ASK_QUESTION, value = "Ask the user an open-ended question")
-        public String askQuestion(final String question) {
-            calls.add(ASK_QUESTION);
-            return "";
-        }
-
-        @Override
-        @Tool(name = ASK_SINGLE_CHOICE, value = "Ask the user to select one option")
-        public String askSingleChoice(final String question, final List<String> options) {
-            calls.add(ASK_SINGLE_CHOICE);
-            this.question = question;
-            this.options = options;
-            if (failure != null) {
-                throw failure;
-            }
-            return singleChoice;
-        }
-
-        @Override
-        @Tool(name = ASK_MULTIPLE_CHOICE, value = "Ask the user to select multiple options")
-        public List<String> askMultipleChoice(final String question, final List<String> options) {
-            calls.add(ASK_MULTIPLE_CHOICE);
-            this.question = question;
-            this.options = options;
-            if (failure != null) {
-                throw failure;
-            }
-            return multipleChoice;
-        }
-
-        @Override
-        @Tool(name = ASK_CONFIRMATION, value = "Ask the user to confirm")
-        public boolean askConfirmation(final String question) {
-            calls.add(ASK_CONFIRMATION);
-            return false;
-        }
     }
 }
