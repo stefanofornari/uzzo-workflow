@@ -210,7 +210,7 @@ role only when the project genuinely has it.
 # Stories Index
 
 > One `##` section per domain. Inside each section, a table with
-> `id | title | status`, where status is one of `TODO`, `WIP`, `DONE`, `CLOSED`.
+> `id | title | status`, where status is one of `TODO`, `WIP`, `DONE`, `BLOCKED`, `CLOSED`.
 > New stories default to `TODO`; preserve existing statuses.
 
 _No stories yet. Domain sections are added when user stories are generated._
@@ -243,7 +243,7 @@ metadata:
 > **Stub — canonical instructions missing.** This file was created by
 > `uzzo-init` because the canonical skill was unavailable. Replace it with the
 > version shipped in the Uzzo Workflow distribution
-> (`src/main/uzz/skills/[SKILL DIRECTORY]/SKILL.md`) or from
+> (`uzzo-workflow-kb/src/main/resources/uzz/skills/[SKILL DIRECTORY]/SKILL.md`) or from
 > https://github.com/stefanofornari/uzzo-workflow before relying on it.
 
 ## Goal
