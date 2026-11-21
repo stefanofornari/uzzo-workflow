@@ -38,10 +38,12 @@ public class UzzoAgentBuilder {
      * {@link AgentSystemMessage}, so that a host can change where skills come from.
      */
     public static AiServices<UzzoScopeAgent> ScopeAgentBuilder(final AgentSystemMessage skills) {
+        final KbSkill kb = new KbSkill(skills);
         return AiServices.builder(UzzoScopeAgent.class)
             .systemMessageProvider(
-                chatMemoryId -> skills.loadSkill("uzz/skills/scope/SKILL.md")
-            );
+                chatMemoryId -> skills.loadSkill("uzz/skills/scope/SKILL.md") + "\n\n" + kb.catalogue()
+            )
+            .toolProvider(kb.toolProvider());
     }
 
     public static AiServices<UzzoStoryAgent> StoryAgentBuilder() {
@@ -53,10 +55,12 @@ public class UzzoAgentBuilder {
      * {@link AgentSystemMessage}, so that a host can change where skills come from.
      */
     public static AiServices<UzzoStoryAgent> StoryAgentBuilder(final AgentSystemMessage skills) {
+        final KbSkill kb = new KbSkill(skills);
         return AiServices.builder(UzzoStoryAgent.class)
             .systemMessageProvider(
-                chatMemoryId -> skills.loadSkill("uzz/skills/story/SKILL.md")
-            );
+                chatMemoryId -> skills.loadSkill("uzz/skills/story/SKILL.md") + "\n\n" + kb.catalogue()
+            )
+            .toolProvider(kb.toolProvider());
     }
 
     public static AiServices<UzzoCodeAgent> CodeAgentBuilder() {
@@ -68,9 +72,11 @@ public class UzzoAgentBuilder {
      * {@link AgentSystemMessage}, so that a host can change where skills come from.
      */
     public static AiServices<UzzoCodeAgent> CodeAgentBuilder(final AgentSystemMessage skills) {
+        final KbSkill kb = new KbSkill(skills);
         return AiServices.builder(UzzoCodeAgent.class)
             .systemMessageProvider(
-                chatMemoryId -> skills.loadSkill("uzz/skills/code/SKILL.md")
-            );
+                chatMemoryId -> skills.loadSkill("uzz/skills/code/SKILL.md") + "\n\n" + kb.catalogue()
+            )
+            .toolProvider(kb.toolProvider());
     }
 }

@@ -1,8 +1,8 @@
 ---
-name: kb-man
+name: uzzo-kb
 description: Manage and structure knowledge base articles across library, project, and user story folders. Use when creating, updating, or organizing markdown documentation, requirements, and user stories.
-meta:
-  version: "20261002"
+metadata:
+  version: "20261117"
 ---
 
 # Knowledge Base Management
@@ -11,7 +11,7 @@ Standard instructions and guidelines for structuring, organizing, and writing ma
 
 ## Knowledge Base Structure
 
-The knowledge base consists of articles written in Markdown, organized into three primary top-level directories:
+The knowledge base consists of articles written in Markdown, organized into four primary top-level directories:
 
 - **`library/`**: General reference information, development practices, programming language guides, frameworks, and standard definitions.
 - **`project/`**: Project-specific information such as name, version, summary, team roles/people, timeline, online repositories, and architectural overviews.
@@ -22,7 +22,7 @@ The knowledge base consists of articles written in Markdown, organized into thre
 
 - **No direct root files**: Do not place articles directly under the root folder. All articles must reside within `library/`, `project/`, `stories/`, or their subdirectories.
 - **Subdirectories**: Categorize articles into nested subdirectories under the main folders as appropriate.
-- **Full Relative Path References**: Identify and reference articles by their complete relative path (e.g., `stories/authentication/US101-dark-mode.md`).
+- **Full Relative Path References**: Identify and reference articles by their complete relative path (e.g., `stories/auth/US-000101/US-000101.md`).
 - **Keywords Requirement**: Every knowledge base article MUST conclude with a `### Keywords` section containing relevant search and categorization tags.
 
 ---

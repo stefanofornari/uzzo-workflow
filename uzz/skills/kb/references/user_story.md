@@ -43,8 +43,8 @@ Scan all existing `uzz/stories/*/US-*/` folders. Take the highest `US-NUMBER` fo
 
 - If `scope.md` labels functional domains explicitly, reuse those labels directly.
 - Otherwise, derive codes from named submodules/components (e.g. `BillingService` → `billing`).
-- Cross-cutting capabilities with no clear owner go under `CORE`.
-- Before creating a new domain code, check for an existing `uzz/stories/<DOMAIN>/` folder covering the same area and reuse it.
+- Cross-cutting capabilities with no clear owner go under `core`.
+- Before creating a new domain code, check for an existing `uzz/stories/[DOMAIN]/` folder covering the same area and reuse it.
 - A nested structure of code domains separated by '/' can be used
 ---
 
@@ -59,7 +59,7 @@ uzz/stories/[DOMAIN]/[US-ID]/[US-ID].md
 **Rules:**
 - Parent directories must be created recursively before writing the file.
 - Do **not** merge multiple stories into a single file or a generic folder root.
-- Stories in the knowledge base `stories/` folder use the path `stories/[domain]/[US-ID].md` and are identified by their complete relative path (e.g. `stories/authentication/US101-dark-mode.md`).
+- Stories in the knowledge base `stories/` folder use the path `stories/[DOMAIN]/[US-ID]/[US-ID].md` and are identified by their complete relative path (e.g. `stories/authentication/US-000101/US-000101.md`).
 
 ---
 
@@ -83,13 +83,8 @@ SO THAT [benefit]
 - [US-ID-1]
 - [US-ID-2]
 
-#### Technical Context & Constraints
-* **Target System**: [e.g., Spring Boot backend, Web UI, Mobile app]
-* **Toolchain / Rules**: [coding standards and frameworks from scope.md]
-* **Phase**: [only if scope.md flagged the capability with a deferred-phase qualifier, e.g. "post-MVP"]
-
 #### Notes
-1. Technical details, implementation guidance, architectural constraints, or edge cases.
+1. Additional context and norms, implementation guidance, architectural constraints, or edge cases.
 2. Do NOT put testable acceptance criteria here — keep them in the dedicated section below.
 
 ### Acceptance Criteria
@@ -121,7 +116,7 @@ Scenario: [Edge case or error handling title]
 
 ### 5.1 Title
 - Must be clear, concise, and capture the user intent.
-- Format: `## [US-ID] — [Descriptive Title]` (e.g. `## AUTH/US-000001 — Enable Dark Mode for Improved User Experience`).
+- Format: `## [US-ID] — [Descriptive Title]` (e.g. `## gui/US-000001 — Enable Dark Mode for Improved User Experience`).
 
 ### 5.2 User Story Body
 - Follow the classic `AS A / I WANT / SO THAT` format.
@@ -136,29 +131,26 @@ Scenario: [Edge case or error handling title]
 | `WIP` | In progress |
 | `DONE` | Implemented and verified |
 | `BLOCKED` | Cannot proceed — dependency or impediment |
+| `CLOSED` | Not valid any more |
 
 ### 5.4 Dependencies
-- Explicitly list dependent story IDs (e.g. `AUTH/US-000001`).
+- Explicitly list dependent story IDs (e.g. `auth/US-000001`).
 - Establishes build and implementation ordering.
 
-### 5.5 Technical Context & Constraints
-- Target system, toolchain references, and any phase qualifier inherited from `scope.md`.
-- In-scope items with a deferred-phase qualifier (e.g. "post-MVP", "phase 2") are still written as normal stories; the qualifier is noted here so deferral stays visible.
+### 5.5 Notes
+- Additional context and norms, implementation guidance, architectural constraints, or edge cases.
+- Do NOT put testable acceptance criteria here — keep them in the dedicated section below.
 
-### 5.6 Notes
-- Technical details, implementation guidance, configuration parameters, edge cases.
-- **Do not** place testable acceptance criteria here.
-
-### 5.7 Acceptance Criteria
+### 5.6 Acceptance Criteria
 - Written as **Gherkin scenarios** (`Given / When / Then`).
 - Every criterion must be **testable and verifiable**.
 - Cover at least one happy-path scenario and one edge-case or error scenario.
 - Keyword aliases accepted: `GIVEN / WHEN / EXPECT` when using the BDD block format.
 
-### 5.8 References
+### 5.7 References
 - Links to external sources, design files, ADRs, pull requests, or issue trackers.
 
-### 5.9 Keywords
+### 5.8 Keywords
 - Placed **at the very end** of every article.
 - Bulleted list of relevant tags to optimise searchability.
 
