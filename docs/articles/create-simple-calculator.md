@@ -11,6 +11,13 @@ They illustrate how the knowledge base records decisions, makes progress
 visible, and gives both the product owner and the AI a consistent context to
 work from.
 
+The prompts and model responses are reproduced as they appeared in this
+walkthrough. Exact responses may vary depending on the model and its version.
+
+You can follow either setup path below: an LLM CLI configured with the Uzzo
+skills, or the Uzzo Workflow NetBeans plugin. The calculator project uses Java
+21 and Maven.
+
 ## First, create a project
 
 ### Using the command line and an AI CLI
@@ -446,6 +453,9 @@ reader. The resulting index was:
 
 ```
 
+The calculator stories are complete in this walkthrough, but the three
+platform-specific setup stories remain TODO. Installing and launching the
+application on Windows, macOS, and Linux is therefore left for the reader.
 
 ## Conclusion
 
