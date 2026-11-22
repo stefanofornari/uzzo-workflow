@@ -40,18 +40,18 @@ skills, or the Uzzo Workflow NetBeans plugin. The calculator project uses Java
 #### Create the project
 1. Go to **Tools > Plugins > Installed**.
 1. Select **Uzzo Workflow for NetBeans**.
-    ![Uzzo Workflow Plugin](images/calculator/fig1.png)
+    ![Uzzo Workflow Plugin](calculator/images/fig1.png)
 1. Install up the plugin.
 1. Create a standard Maven project:
    1. Select **File > New Project > Java with Maven > Java Application**.
    1. Provide the requested information:
-       ![Uzzo Workflow Plugin](images/calculator/fig2.png)
+       ![Uzzo Workflow Plugin](calculator/images/fig2.png)
 
 #### Initialize the knowledge base
 1. Right-click `simple-calc` and select **Initialize Uzzo Knowledge Base**.
-    ![Initiale Uzzo Knowledge Base](images/calculator/fig3.png)
+    ![Initiale Uzzo Knowledge Base](calculator/images/fig3.png)
 1. Provide the requested information or accept the proposed values.
-    ![Additiona Project Info](images/calculator/fig4.png)
+    ![Additiona Project Info](calculator/images/fig4.png)
 
 
 ## Let's scope the project
@@ -59,7 +59,7 @@ skills, or the Uzzo Workflow NetBeans plugin. The calculator project uses Java
 Either of the two methods above results in a new Uzzo Knowledge Base node under
 the project root:
 
-![Uzzo Knowledge Base Node](images/calculator/fig5.png)
+![Uzzo Knowledge Base Node](calculator/images/fig5.png)
 
 To begin, I described the application I wanted to build in a prompt like this:
 ```
@@ -403,7 +403,7 @@ With the requirements refined, I was ready to implement the first user story:
 The story is first marked WIP in `index.md`; implementation then begins. The
 result looks like this:
 
-![Calculator App](images/calculator/fig6.png)
+![Calculator App](calculator/images/fig6.png)
 
 I let the CLI continue implementing and checking each story. When I reviewed
 US-4, however, I realized that the implemented history UI was not what I had in
@@ -473,3 +473,9 @@ Most importantly, these artifacts can evolve as the product owner's
 understanding changes. Scoping, story writing, and implementation remain
 connected activities, so the team can adjust course without losing the context
 behind its decisions.
+
+
+## References
+- [Uzzo Workflow](https://stefanofornari.github.io/uzzo-workflow/)
+- [Uzzo Workflow for NetBeans](https://stefanofornari.github.io/nb-uzzo-workflow/)
+- [Calculator source](https://stefanofornari.github.io/uzzo-workflow/calculator/simple-calc.zip)
