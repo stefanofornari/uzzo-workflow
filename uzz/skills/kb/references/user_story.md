@@ -159,7 +159,7 @@ Scenario: [Edge case or error handling title]
 ## 6. Scope Compliance Rules
 
 - **Out-of-scope items**: Do **not** generate stories for anything explicitly listed under an "Out-of-Scope" or "Future Enhancements" heading in `scope.md`.
-- **Deferred items**: In-scope items with a deferred qualifier are still generated normally; record the qualifier in **Technical Context & Constraints**.
+- **Deferred items**: In-scope items with a deferred qualifier are still generated normally; record the qualifier in **Notes**.
 
 ---
 
