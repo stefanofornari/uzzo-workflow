@@ -478,4 +478,4 @@ behind its decisions.
 ## References
 - [Uzzo Workflow](https://stefanofornari.github.io/uzzo-workflow/)
 - [Uzzo Workflow for NetBeans](https://stefanofornari.github.io/nb-uzzo-workflow/)
-- [Calculator source](https://stefanofornari.github.io/uzzo-workflow/calculator/simple-calc.zip)
+- [Calculator source](https://stefanofornari.github.io/uzzo-workflow/articles/calculator/simple-calc.zip)
